@@ -1,0 +1,87 @@
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.15.0.xsd">
+    <generator>
+        <generate>
+            <!-- Individual flags for each object type -->
+            <globalCatalogReferences>true</globalCatalogReferences>
+            <globalSchemaReferences>false</globalSchemaReferences>
+            <globalTableReferences>true</globalTableReferences>
+            <globalSequenceReferences>true</globalSequenceReferences>
+            <globalUDTReferences>true</globalUDTReferences>
+            <globalRoutineReferences>true</globalRoutineReferences>
+            <globalQueueReferences>true</globalQueueReferences>
+            <globalLinkReferences>true</globalLinkReferences>
+            <pojos>true</pojos>
+            <!--<daos>true</daos>-->
+            <emptySchemas>false</emptySchemas>
+            <!--<springAnnotations>true</springAnnotations>-->
+            <!--<jpaAnnotations>true</jpaAnnotations>-->
+            <!--<jpaVersion>2.2</jpaVersion>-->
+            <deprecated>false</deprecated>
+            <generatedAnnotation>true</generatedAnnotation>
+            <generatedAnnotationType>DETECT_FROM_JDK</generatedAnnotationType>
+            <generatedAnnotationDate>true</generatedAnnotationDate>
+        </generate>
+        <database>
+            <forcedTypes>
+                <forcedType>
+                    <!--将smallint和tinyint强转为int类型-->
+                    <name>INTEGER</name>
+                    <types>TINYINT|SMALLINT</types>
+                </forcedType>
+                <forcedType>
+                    <userType>java.util.Date</userType>
+                    <types>BIGINT</types>
+                    <expression>.*time</expression>
+                    <!-- <lambdaConverter>
+                         &lt;!&ndash;user-type to db-type&ndash;&gt;
+                         <from>Date::new</from>
+                         &lt;!&ndash;user-type to db-type&ndash;&gt;
+                         <to>Date::getTime</to>
+                     </lambdaConverter>-->
+                    <converter>
+                        org.jooq.Converter.ofNullable(
+                        Long.class, Date.class,
+                        Date::new, Date::getTime)
+                    </converter>
+                </forcedType>
+                <!--将时间&日期类型统一转化成java.util.Date-->
+                <forcedType>
+                    <userType>java.util.Date</userType>
+                    <types>TIME</types>
+                    <converter>com.jooq.predefine.converter.LocalTime2DateConverter</converter>
+                </forcedType>
+                <forcedType>
+                    <userType>java.util.Date</userType>
+                    <types>DATE</types>
+                    <converter>com.jooq.predefine.converter.LocalDate2DateConverter</converter>
+                </forcedType>
+                <forcedType>
+                    <userType>java.util.Date</userType>
+                    <types>DATETIME|TIMESTAMP</types>
+                    <converter>com.jooq.predefine.converter.LocalDateTime2DateConverter</converter>
+                </forcedType>
+            </forcedTypes>
+            <!--根据schema生成代码,不可使用通配符-->
+            <!--<schemata>
+                <schema>
+                    <inputSchema>schema-name</inputSchema>
+                </schema>
+            </schemata>-->
+            <name>org.jooq.meta.extensions.ddl.DDLDatabase</name>
+            <properties>
+                <property>
+                    <key>scripts</key>
+                    <value>**/h2/*.sql</value>
+                </property>
+                <property>
+                    <key>sort</key>
+                    <value>semantic</value>
+                </property>
+            </properties>
+        </database>
+        <target>
+            <packageName>com.tengzhe.jooq.data</packageName>
+            <directory>src/main/java</directory>
+        </target>
+    </generator>
+</configuration>
