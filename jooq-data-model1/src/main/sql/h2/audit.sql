@@ -6,7 +6,7 @@ SET SCHEMA `audit`;
 
 CREATE TABLE `huichuan_idea_key_frame` (
     `id` BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `user_id` BIGINT(20) unsigned NOT NULL DEFAULT -1 COMMENT '用户id',
+    `user_id` BIGINT(20) NOT NULL DEFAULT -1 COMMENT '用户id',
     `idea_id` BIGINT(20) NOT NULL DEFAULT -1 COMMENT '用户id',
     `video_url` VARCHAR(256) NOT NULL DEFAULT '' COMMENT '视频地址',
     `content` TEXT NOT NULL COMMENT '关键帧内容, JSON格式数据',
