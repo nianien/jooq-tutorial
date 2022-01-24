@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jooq-data-model1</artifactId>
+    <artifactId>jooq-data-audit</artifactId>
 
     <dependencies>
         <dependency>
