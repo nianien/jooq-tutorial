@@ -8,9 +8,9 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
-        <module>jooq-data-model1</module>
-        <module>jooq-data-model2</module>
         <module>jooq-predefined</module>
+        <module>jooq-data-uc</module>
+        <module>jooq-data-audit</module>
     </modules>
 
     <properties>
