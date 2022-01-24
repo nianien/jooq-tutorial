@@ -17,9 +17,9 @@
             <!--<jpaAnnotations>true</jpaAnnotations>-->
             <!--<jpaVersion>2.2</jpaVersion>-->
             <deprecated>false</deprecated>
-            <generatedAnnotation>true</generatedAnnotation>
-            <generatedAnnotationType>DETECT_FROM_JDK</generatedAnnotationType>
-            <generatedAnnotationDate>true</generatedAnnotationDate>
+            <generatedAnnotation>false</generatedAnnotation>
+            <!--            <generatedAnnotationType>JAVAX_ANNOTATION_GENERATED</generatedAnnotationType>-->
+            <!--            <generatedAnnotationDate>true</generatedAnnotationDate>-->
         </generate>
         <database>
             <forcedTypes>
@@ -29,6 +29,7 @@
                     <types>TINYINT|SMALLINT</types>
                 </forcedType>
                 <forcedType>
+                    <!--将long型表示时间转化成java.util.Date-->
                     <userType>java.util.Date</userType>
                     <types>BIGINT</types>
                     <expression>.*time</expression>
@@ -59,6 +60,14 @@
                     <userType>java.util.Date</userType>
                     <types>DATETIME|TIMESTAMP</types>
                     <converter>com.jooq.predefine.converter.LocalDateTime2DateConverter</converter>
+                </forcedType>
+
+                <!--敏感字段加密-->
+                <forcedType>
+                    <userType>java.lang.String</userType>
+                    <types>VARCHAR|CHAR</types>
+                    <expression>.*(phone|email).*</expression>
+                    <converter>com.jooq.predefine.converter.EncryptConverter</converter>
                 </forcedType>
             </forcedTypes>
             <!--根据schema生成代码,不可使用通配符-->

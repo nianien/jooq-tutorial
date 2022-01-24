@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    include: jdbc
+logging:
+  level:
+    root: info
+    org.springframework.web: trace
+server:
+  port: 8081
