@@ -20,6 +20,8 @@
             <generatedAnnotation>false</generatedAnnotation>
             <!--<generatedAnnotationType>JAVAX_ANNOTATION_GENERATED</generatedAnnotationType>-->
             <!--<generatedAnnotationDate>true</generatedAnnotationDate>-->
+            <!--是否使用JDK8的java.timetypes类型-->
+            <javaTimeTypes>true</javaTimeTypes>
         </generate>
         <database>
             <forcedTypes>
@@ -49,17 +51,17 @@
                 <forcedType>
                     <userType>java.util.Date</userType>
                     <types>TIME</types>
-                    <converter>com.jooq.predefine.converter.LocalTime2DateConverter</converter>
+                    <converter>com.jooq.predefine.converter.LocalTimeConverter</converter>
                 </forcedType>
                 <forcedType>
                     <userType>java.util.Date</userType>
                     <types>DATE</types>
-                    <converter>com.jooq.predefine.converter.LocalDate2DateConverter</converter>
+                    <converter>com.jooq.predefine.converter.LocalDateConverter</converter>
                 </forcedType>
                 <forcedType>
                     <userType>java.util.Date</userType>
                     <types>DATETIME|TIMESTAMP</types>
-                    <converter>com.jooq.predefine.converter.LocalDateTime2DateConverter</converter>
+                    <converter>com.jooq.predefine.converter.LocalDateTimeConverter</converter>
                 </forcedType>
 
                 <!--敏感字段加密-->
