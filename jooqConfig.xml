@@ -18,8 +18,8 @@
             <!--<jpaVersion>2.2</jpaVersion>-->
             <deprecated>false</deprecated>
             <generatedAnnotation>false</generatedAnnotation>
-            <!--            <generatedAnnotationType>JAVAX_ANNOTATION_GENERATED</generatedAnnotationType>-->
-            <!--            <generatedAnnotationDate>true</generatedAnnotationDate>-->
+            <!--<generatedAnnotationType>JAVAX_ANNOTATION_GENERATED</generatedAnnotationType>-->
+            <!--<generatedAnnotationDate>true</generatedAnnotationDate>-->
         </generate>
         <database>
             <forcedTypes>
