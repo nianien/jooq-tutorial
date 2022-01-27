@@ -4,7 +4,6 @@
 package com.tengzhe.jooq.data.audit.tables;
 
 
-import com.jooq.predefine.converter.LocalDateTime2DateConverter;
 import com.tengzhe.jooq.data.audit.Audit;
 import com.tengzhe.jooq.data.audit.Keys;
 import com.tengzhe.jooq.data.audit.tables.records.UserInfoConfigRecord;

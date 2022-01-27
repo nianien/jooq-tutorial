@@ -9,8 +9,9 @@ import java.util.Date;
 
 /**
  * {@link Date}与{@link LocalDate}互转
+ * @since jdk11
  */
-public class LocalDate2DateConverter implements Converter<LocalDate, Date> {
+public class LocalDateConverter implements Converter<LocalDate, Date> {
     private static ZoneId zone = ZoneId.systemDefault();
 
     @Override
