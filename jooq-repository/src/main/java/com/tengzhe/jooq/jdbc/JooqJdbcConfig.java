@@ -1,14 +1,14 @@
-package com.tengzhe.jooq.test;
+package com.tengzhe.jooq.jdbc;
 
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.RenderNameCase;
-import org.jooq.conf.RenderNameStyle;
 import org.jooq.conf.RenderQuotedNames;
 import org.jooq.impl.DSL;
 import org.jooq.impl.DefaultConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -16,7 +16,11 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 @Configuration
-public class JooqApplicationConfig {
+@EnableAutoConfiguration
+public class JooqJdbcConfig {
+
+    @Value("${spring.application.name:}")
+    private String name;
 
     @Bean
     @Primary
@@ -30,5 +34,12 @@ public class JooqApplicationConfig {
                 .withRenderNameCase(RenderNameCase.AS_IS)
                 .withRenderQuotedNames(RenderQuotedNames.EXPLICIT_DEFAULT_UNQUOTED);
         return DSL.using(config);
+    }
+
+    @Override
+    public String toString() {
+        return "JooqJdbcConfig{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

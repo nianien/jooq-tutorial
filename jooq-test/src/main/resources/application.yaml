@@ -1,6 +1,6 @@
 spring:
-  profiles:
-    include: jdbc
+  application:
+    name: jooq-test
 logging:
   level:
     root: info

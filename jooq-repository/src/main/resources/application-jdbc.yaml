@@ -15,4 +15,6 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: false
+  application:
+    name: jdbc
 #        web-admin-password:
