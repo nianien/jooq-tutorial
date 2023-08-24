@@ -39,4 +39,10 @@ public class UserController {
                 .where(ACCOUNT.NAME.contains(name))
                 .fetchOneInto(Account.class);
     }
+
+    @GetMapping("/total")
+    public Integer total() {
+        return dslContext.selectCount().from(ACCOUNT)
+                .fetchOneInto(Integer.class);
+    }
 }
