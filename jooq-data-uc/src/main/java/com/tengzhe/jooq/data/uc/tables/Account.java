@@ -19,7 +19,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row20;
+import org.jooq.Row21;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -151,6 +151,11 @@ public class Account extends TableImpl<AccountRecord> {
      */
     public final TableField<AccountRecord, Date> UPDATE_TIME = createField(DSL.name("update_time"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
 
+    /**
+     * The column <code>uc.account.tenant_code</code>.
+     */
+    public final TableField<AccountRecord, String> TENANT_CODE = createField(DSL.name("tenant_code"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
+
     private Account(Name alias, Table<AccountRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -231,11 +236,11 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row20 type methods
+    // Row21 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row20<Long, String, Long, String, Integer, Integer, String, String, Integer, String, String, String, Long, Long, Long, Integer, Long, Long, Date, Date> fieldsRow() {
-        return (Row20) super.fieldsRow();
+    public Row21<Long, String, Long, String, Integer, Integer, String, String, Integer, String, String, String, Long, Long, Long, Integer, Long, Long, Date, Date, String> fieldsRow() {
+        return (Row21) super.fieldsRow();
     }
 }

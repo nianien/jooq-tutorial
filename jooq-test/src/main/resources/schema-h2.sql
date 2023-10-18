@@ -25,5 +25,6 @@ CREATE TABLE `account`
     `shop_user_id`  bigint(20)   NOT NULL DEFAULT -1 COMMENT '<小店用户ID>',
     `create_time`   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `tenant_code`   varchar(255)   NOT NULL DEFAULT '' COMMENT '<租户编码>',
     PRIMARY KEY (`id`)
 )/*ENGINE=INNODB DEFAULT CHARSET=UTF8 COMMENT='用户信息表'*/;

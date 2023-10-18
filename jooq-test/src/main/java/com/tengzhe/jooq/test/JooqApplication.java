@@ -9,6 +9,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 主应用
+ */
 @Slf4j
 @RestController
 @SpringBootApplication
@@ -24,6 +27,11 @@ public class JooqApplication {
     }
 
 
+    /**
+     * 首页
+     *
+     * @return
+     */
     @RequestMapping("/")
     public String index() {
         return "hello,word!";

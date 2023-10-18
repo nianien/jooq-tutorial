@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import static com.tengzhe.jooq.data.uc.Tables.ACCOUNT;
 
 /**
+ * 用户管理模块
  * Created on 2022/1/24
  *
  * @author liyifei
@@ -23,7 +24,15 @@ public class UserController {
     @Resource
     private DSLContext dslContext;
 
-    @GetMapping("/{name}/{phone}/{email}")
+    /**
+     * 注册用户
+     *
+     * @param name  用户名
+     * @param phone 电话
+     * @param email 邮箱
+     * @return 注册结果
+     */
+    @GetMapping("/insert/{name}/{phone}/{email}")
     public String register(@PathVariable String name, @PathVariable String phone, @PathVariable String email) {
         dslContext.insertInto(ACCOUNT)
                 .columns(ACCOUNT.NAME, ACCOUNT.PHONE, ACCOUNT.EMAIL)
@@ -33,10 +42,46 @@ public class UserController {
     }
 
 
+    /**
+     * 用户查询
+     *
+     * @param name 用户名
+     * @return
+     */
     @GetMapping("/{name}")
     public Account get(@PathVariable String name) {
-        return dslContext.select().from(ACCOUNT)
-                .where(ACCOUNT.NAME.contains(name))
+        com.tengzhe.jooq.data.uc.tables.Account alias = ACCOUNT.as("a");
+        return dslContext.select(alias.asterisk()).from(alias)
+                .where(alias.NAME.contains(name))
                 .fetchOneInto(Account.class);
+    }
+
+    /**
+     * 用户查询
+     *
+     * @param name 用户名
+     * @return
+     */
+    @GetMapping("/update/{name}/{phone}/{email}")
+    public int put(@PathVariable String name, @PathVariable String phone, @PathVariable String email) {
+        return dslContext.update(ACCOUNT)
+                .set(ACCOUNT.EMAIL, email)
+                .set(ACCOUNT.TENANT_CODE, "default")
+                .where(ACCOUNT.NAME.eq(name))
+                .and(ACCOUNT.PHONE.eq(phone))
+                .execute();
+    }
+
+    /**
+     * 用户查询
+     *
+     * @param name 用户名
+     * @return
+     */
+    @GetMapping("/delete/{name}")
+    public int delete(@PathVariable String name) {
+        return dslContext.delete(ACCOUNT)
+                .where(ACCOUNT.NAME.eq(name))
+                .execute();
     }
 }

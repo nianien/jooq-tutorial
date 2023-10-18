@@ -36,6 +36,7 @@ public class Account implements Serializable {
     private Long    shopUserId;
     private Date    createTime;
     private Date    updateTime;
+    private String  tenantCode;
 
     public Account() {}
 
@@ -60,6 +61,7 @@ public class Account implements Serializable {
         this.shopUserId = value.shopUserId;
         this.createTime = value.createTime;
         this.updateTime = value.updateTime;
+        this.tenantCode = value.tenantCode;
     }
 
     public Account(
@@ -82,7 +84,8 @@ public class Account implements Serializable {
         Long    agentId,
         Long    shopUserId,
         Date    createTime,
-        Date    updateTime
+        Date    updateTime,
+        String  tenantCode
     ) {
         this.id = id;
         this.name = name;
@@ -104,6 +107,7 @@ public class Account implements Serializable {
         this.shopUserId = shopUserId;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.tenantCode = tenantCode;
     }
 
     /**
@@ -386,6 +390,20 @@ public class Account implements Serializable {
         this.updateTime = updateTime;
     }
 
+    /**
+     * Getter for <code>uc.account.tenant_code</code>.
+     */
+    public String getTenantCode() {
+        return this.tenantCode;
+    }
+
+    /**
+     * Setter for <code>uc.account.tenant_code</code>.
+     */
+    public void setTenantCode(String tenantCode) {
+        this.tenantCode = tenantCode;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Account (");
@@ -410,6 +428,7 @@ public class Account implements Serializable {
         sb.append(", ").append(shopUserId);
         sb.append(", ").append(createTime);
         sb.append(", ").append(updateTime);
+        sb.append(", ").append(tenantCode);
 
         sb.append(")");
         return sb.toString();

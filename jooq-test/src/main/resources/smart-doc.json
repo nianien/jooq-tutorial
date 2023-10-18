@@ -1,0 +1,18 @@
+{
+  "serverUrl": "http://localhost:63342/jooq-tutorial/jooq-test/api/",
+  "pathPrefix": "docs",
+  "allInOne": true,
+  "outPath": "api/docs",
+  "style": "xt256",
+  "projectName": "jooq教程",
+  "createDebugPage": true,
+  "revisionLogs": [
+    {
+      "version": "1.0",
+      "revisionTime": "2023-01-31 10:30",
+      "status": "新建",
+      "author": "lining",
+      "remarks": "测试版"
+    }
+  ]
+}
