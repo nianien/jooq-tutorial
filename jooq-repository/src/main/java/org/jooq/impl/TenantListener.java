@@ -13,7 +13,6 @@ public class TenantListener extends DefaultVisitListener {
 
     private final static Field<String> TARGET_FIELD = DSL.field(name("tenant_code"), String.class);
     private final static ThreadLocal<Param<String>> TARGET_VALUE = ThreadLocal.withInitial(() -> DSL.val("default"));
-    private final static ThreadLocal<String> TARGET_P = ThreadLocal.withInitial(() -> "default");
     private final static boolean DEBUG_ENABLE = Boolean.valueOf(System.getProperty("jooq.debug", "true"));
 
 
