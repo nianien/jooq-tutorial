@@ -23,8 +23,8 @@ public class PerformanceListener extends DefaultExecuteListener {
 
     private static String SLOW_QUERY_TIME = System.getProperty("jooq.slow-query-time", "5000");
 
-    private StopWatch stopWatch = new StopWatch();
-    private List<String> sqlList = new ArrayList<>();
+    private static ThreadLocal<List<String>> sqlList = ThreadLocal.withInitial(() -> new ArrayList<>());
+    private static ThreadLocal<StopWatch> stopWatch = ThreadLocal.withInitial(() -> new StopWatch());
 
 
     @PostConstruct
@@ -37,11 +37,20 @@ public class PerformanceListener extends DefaultExecuteListener {
 
     @Override
     public void renderEnd(ExecuteContext ctx) {
+
         // Create a new DSLContext for logging rendering purposes
         DSLContext dslContext = DSL.using(ctx.dialect(),
                 SettingsTools.clone(ctx.settings()).withRenderFormatted(false));
         if (ctx.query() != null) {
-            sqlList.add(dslContext.renderInlined(ctx.query()));
+            String sql = dslContext.renderInlined(ctx.query());
+            try {
+                if (sql.contains("liyifei")) {
+                    Thread.sleep(5000);
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            sqlList.get().add(sql);
         }
     }
 
@@ -49,12 +58,10 @@ public class PerformanceListener extends DefaultExecuteListener {
     @Override
     public void executeEnd(ExecuteContext ctx) {
         if (SHOW_SQL) {
-            log.info("jOOQ Meta executed:\n{}", sqlList);
-        } else if (stopWatch.split() > TimeUnit.MILLISECONDS.toNanos(Long.parseLong(SLOW_QUERY_TIME))) {
+            log.info("jOOQ Meta executed:\n{}", sqlList.get());
+        } else if (stopWatch.get().split() > TimeUnit.MILLISECONDS.toNanos(Long.parseLong(SLOW_QUERY_TIME))) {
             log.warn("jOOQ Meta executed a slow query:\n{}", sqlList);
         }
-        sqlList = new ArrayList<>();
-        stopWatch = new StopWatch();
     }
 
 
