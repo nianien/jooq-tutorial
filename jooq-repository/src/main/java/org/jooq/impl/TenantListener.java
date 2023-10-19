@@ -9,7 +9,7 @@ import java.util.List;
 import static org.jooq.impl.DSL.name;
 
 @Slf4j
-public class TenantListener extends DefaultVisitListener {
+public class TenantListener extends DefaultExecuteListener {
 
     private final static Field<String> TARGET_FIELD = DSL.field(name("tenant_code"), String.class);
     private final static ThreadLocal<Param<String>> TARGET_VALUE = ThreadLocal.withInitial(() -> DSL.val("default"));
@@ -17,30 +17,15 @@ public class TenantListener extends DefaultVisitListener {
 
 
     @Override
-    public void clauseStart(VisitContext context) {
-        if (DEBUG_ENABLE) {
-            log.info("==>{}: {}", context.clause(), "start");
-        }
-    }
-
-    @Override
-    public void clauseEnd(VisitContext context) {
-        if (DEBUG_ENABLE) {
-            log.info("==>{}: {}", context.clause(), "end");
-        }
-    }
-
-    @Override
-    public void visitStart(VisitContext context) {
-        QueryPart queryPart = context.queryPart();
+    public void renderStart(ExecuteContext ctx) {
+        QueryPart queryPart = ctx.query();
         //插入时,自动插入tenant_code
         if (queryPart instanceof InsertQueryImpl) {
             InsertQueryImpl insertQuery = (InsertQueryImpl) queryPart;
             Table table = insertQuery.table();
             Field<String> field = table.field(TARGET_FIELD);
             if (field != null) {
-                FieldMapsForInsert insertMaps = insertQuery.getInsertMaps();
-                insertMaps.values.put(field, createFieldValues(insertMaps.rows));
+                insertQuery.addValue(field, TARGET_VALUE.get());
             }
         }
         //更新时, 禁止tenant_code更新,增加tenant_code匹配
@@ -76,15 +61,7 @@ public class TenantListener extends DefaultVisitListener {
             }
         }
         if (DEBUG_ENABLE) {
-            log.info("==>queryPart start:{}", queryPart.getClass());
-        }
-    }
-
-    @Override
-    public void visitEnd(VisitContext context) {
-        QueryPart queryPart = context.queryPart();
-        if (DEBUG_ENABLE) {
-            log.info("==>queryPart end:{}", queryPart.getClass());
+//            log.info("==>queryPart start:{}", queryPart.getClass());
         }
     }
 

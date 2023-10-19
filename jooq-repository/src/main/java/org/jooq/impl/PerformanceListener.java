@@ -3,11 +3,12 @@ package org.jooq.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.jooq.ExecuteContext;
-import org.jooq.Query;
 import org.jooq.conf.SettingsTools;
 import org.jooq.tools.StopWatch;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,7 +23,8 @@ public class PerformanceListener extends DefaultExecuteListener {
 
     private static String SLOW_QUERY_TIME = System.getProperty("jooq.slow-query-time", "5000");
 
-    private StopWatch stopWatch;
+    private StopWatch stopWatch = new StopWatch();
+    private List<String> sqlList = new ArrayList<>();
 
 
     @PostConstruct
@@ -30,26 +32,30 @@ public class PerformanceListener extends DefaultExecuteListener {
     }
 
     @Override
-    public void executeStart(ExecuteContext ctx) {
-        stopWatch = new StopWatch();
+    public void start(ExecuteContext ctx) {
+    }
+
+    @Override
+    public void renderEnd(ExecuteContext ctx) {
+        // Create a new DSLContext for logging rendering purposes
+        DSLContext dslContext = DSL.using(ctx.dialect(),
+                SettingsTools.clone(ctx.settings()).withRenderFormatted(false));
+        if (ctx.query() != null) {
+            sqlList.add(dslContext.renderInlined(ctx.query()));
+        }
     }
 
 
     @Override
     public void executeEnd(ExecuteContext ctx) {
-        // Create a new DSLContext for logging rendering purposes
-        DSLContext dslContext = DSL.using(ctx.dialect(),
-                SettingsTools.clone(ctx.settings()).withRenderFormatted(false));
         if (SHOW_SQL) {
-            log.info("jOOQ Meta executed:\n{}", formatted(dslContext, ctx.query()));
+            log.info("jOOQ Meta executed:\n{}", sqlList);
         } else if (stopWatch.split() > TimeUnit.MILLISECONDS.toNanos(Long.parseLong(SLOW_QUERY_TIME))) {
-            log.warn("jOOQ Meta executed a slow query:\n{}", formatted(dslContext, ctx.query()));
+            log.warn("jOOQ Meta executed a slow query:\n{}", sqlList);
         }
+        sqlList = new ArrayList<>();
+        stopWatch = new StopWatch();
     }
 
-
-    private String formatted(DSLContext dslContext, Query query) {
-        return dslContext.renderInlined(query);
-    }
 
 }
