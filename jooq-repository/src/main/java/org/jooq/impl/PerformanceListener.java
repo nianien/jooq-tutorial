@@ -31,13 +31,12 @@ public class PerformanceListener extends DefaultExecuteListener {
 
     @Override
     public void executeStart(ExecuteContext ctx) {
-        super.executeStart(ctx);
         stopWatch = new StopWatch();
     }
 
+
     @Override
     public void executeEnd(ExecuteContext ctx) {
-        super.executeEnd(ctx);
         // Create a new DSLContext for logging rendering purposes
         DSLContext dslContext = DSL.using(ctx.dialect(),
                 SettingsTools.clone(ctx.settings()).withRenderFormatted(false));

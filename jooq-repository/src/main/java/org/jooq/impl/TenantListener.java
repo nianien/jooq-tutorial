@@ -36,16 +36,12 @@ public class TenantListener extends DefaultVisitListener {
         //插入时,自动插入tenant_code
         if (queryPart instanceof InsertQueryImpl) {
             InsertQueryImpl insertQuery = (InsertQueryImpl) queryPart;
-            FieldMapsForInsert insertMaps = insertQuery.getInsertMaps();
-            Field targetField = TARGET_FIELD;
-            for (Field<?> field : insertMaps.fields()) {
-                //如果设置了tenant_code字段,则需要重写tenant_code值
-                if (targetField.getName().equals(field.getName())) {
-                    targetField = field;
-                    break;
-                }
+            Table table = insertQuery.table();
+            Field<String> field = table.field(TARGET_FIELD);
+            if (field != null) {
+                FieldMapsForInsert insertMaps = insertQuery.getInsertMaps();
+                insertMaps.values.put(field, createFieldValues(insertMaps.rows));
             }
-            insertMaps.values.put(targetField, createFieldValues(insertMaps.rows));
         }
         //更新时, 禁止tenant_code更新,增加tenant_code匹配
         if (queryPart instanceof UpdateQueryImpl) {

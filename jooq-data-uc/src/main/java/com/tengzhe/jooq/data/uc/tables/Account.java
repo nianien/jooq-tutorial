@@ -19,7 +19,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row21;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -59,42 +59,7 @@ public class Account extends TableImpl<AccountRecord> {
     /**
      * The column <code>uc.account.name</code>.
      */
-    public final TableField<AccountRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
-
-    /**
-     * The column <code>uc.account.user_id</code>.
-     */
-    public final TableField<AccountRecord, Long> USER_ID = createField(DSL.name("user_id"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field("-1", SQLDataType.BIGINT)), this, "");
-
-    /**
-     * The column <code>uc.account.short_name</code>.
-     */
-    public final TableField<AccountRecord, String> SHORT_NAME = createField(DSL.name("short_name"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
-
-    /**
-     * The column <code>uc.account.app_id</code>.
-     */
-    public final TableField<AccountRecord, Integer> APP_ID = createField(DSL.name("app_id"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.field("-1", SQLDataType.INTEGER)), this, "");
-
-    /**
-     * The column <code>uc.account.create_source</code>.
-     */
-    public final TableField<AccountRecord, Integer> CREATE_SOURCE = createField(DSL.name("create_source"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.field("-1", SQLDataType.INTEGER)), this, "");
-
-    /**
-     * The column <code>uc.account.product_name</code>.
-     */
-    public final TableField<AccountRecord, String> PRODUCT_NAME = createField(DSL.name("product_name"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
-
-    /**
-     * The column <code>uc.account.web_site</code>.
-     */
-    public final TableField<AccountRecord, String> WEB_SITE = createField(DSL.name("web_site"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
-
-    /**
-     * The column <code>uc.account.license_type</code>.
-     */
-    public final TableField<AccountRecord, Integer> LICENSE_TYPE = createField(DSL.name("license_type"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.field("1", SQLDataType.INTEGER)), this, "");
+    public final TableField<AccountRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(16).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>uc.account.contact</code>.
@@ -104,42 +69,12 @@ public class Account extends TableImpl<AccountRecord> {
     /**
      * The column <code>uc.account.phone</code>.
      */
-    public final TableField<AccountRecord, String> PHONE = createField(DSL.name("phone"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "", new EncryptConverter());
+    public final TableField<AccountRecord, String> PHONE = createField(DSL.name("phone"), SQLDataType.VARCHAR(13).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "", new EncryptConverter());
 
     /**
      * The column <code>uc.account.email</code>.
      */
-    public final TableField<AccountRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "", new EncryptConverter());
-
-    /**
-     * The column <code>uc.account.corp_id</code>.
-     */
-    public final TableField<AccountRecord, Long> CORP_ID = createField(DSL.name("corp_id"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field("-1", SQLDataType.BIGINT)), this, "");
-
-    /**
-     * The column <code>uc.account.sign_corp_id</code>.
-     */
-    public final TableField<AccountRecord, Long> SIGN_CORP_ID = createField(DSL.name("sign_corp_id"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field("-1", SQLDataType.BIGINT)), this, "");
-
-    /**
-     * The column <code>uc.account.ad_corp_id</code>.
-     */
-    public final TableField<AccountRecord, Long> AD_CORP_ID = createField(DSL.name("ad_corp_id"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field("-1", SQLDataType.BIGINT)), this, "");
-
-    /**
-     * The column <code>uc.account.status</code>.
-     */
-    public final TableField<AccountRecord, Integer> STATUS = createField(DSL.name("status"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.field("-1", SQLDataType.INTEGER)), this, "");
-
-    /**
-     * The column <code>uc.account.agent_id</code>.
-     */
-    public final TableField<AccountRecord, Long> AGENT_ID = createField(DSL.name("agent_id"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field("-1", SQLDataType.BIGINT)), this, "");
-
-    /**
-     * The column <code>uc.account.shop_user_id</code>.
-     */
-    public final TableField<AccountRecord, Long> SHOP_USER_ID = createField(DSL.name("shop_user_id"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field("-1", SQLDataType.BIGINT)), this, "");
+    public final TableField<AccountRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.VARCHAR(16).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "", new EncryptConverter());
 
     /**
      * The column <code>uc.account.create_time</code>.
@@ -154,7 +89,7 @@ public class Account extends TableImpl<AccountRecord> {
     /**
      * The column <code>uc.account.tenant_code</code>.
      */
-    public final TableField<AccountRecord, String> TENANT_CODE = createField(DSL.name("tenant_code"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
+    public final TableField<AccountRecord, String> TENANT_CODE = createField(DSL.name("tenant_code"), SQLDataType.VARCHAR(8).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     private Account(Name alias, Table<AccountRecord> aliased) {
         this(alias, aliased, null);
@@ -236,11 +171,11 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row21 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row21<Long, String, Long, String, Integer, Integer, String, String, Integer, String, String, String, Long, Long, Long, Integer, Long, Long, Date, Date, String> fieldsRow() {
-        return (Row21) super.fieldsRow();
+    public Row8<Long, String, String, String, String, Date, Date, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }
