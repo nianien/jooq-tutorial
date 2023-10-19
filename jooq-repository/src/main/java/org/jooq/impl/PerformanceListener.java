@@ -47,22 +47,9 @@ public class PerformanceListener extends DefaultExecuteListener {
         }
     }
 
-    @Override
-    public void renderEnd(ExecuteContext ctx) {
-        if (ctx.sql().matches("^(?i:(UPDATE|DELETE)(?!.* WHERE ).*)$")) {
-            throw new DeleteOrUpdateWithoutWhereException(ctx.sql());
-        }
-    }
 
     private String formatted(DSLContext dslContext, Query query) {
         return dslContext.renderInlined(query);
     }
 
-    public static class DeleteOrUpdateWithoutWhereException extends RuntimeException {
-
-
-        public DeleteOrUpdateWithoutWhereException(String message) {
-            super(message);
-        }
-    }
 }

@@ -2,10 +2,9 @@ package org.jooq.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DataType;
+import org.jooq.ExecuteContext;
 import org.jooq.Field;
-import org.jooq.QueryPart;
-import org.jooq.VisitContext;
-import org.jooq.tools.StopWatch;
+import org.jooq.Query;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -19,13 +18,7 @@ import java.util.Set;
  * @author xujin.wxj
  */
 @Slf4j
-public class ValidatorListener extends DefaultVisitListener {
-
-    private static boolean SHOW_SQL = Boolean.valueOf(System.getProperty("jooq.show-sql", "true"));
-
-    private static String SLOW_QUERY_TIME = System.getProperty("jooq.slow-query-time", "5000");
-
-    private StopWatch stopWatch;
+public class ValidatorListener extends DefaultExecuteListener {
 
 
     @PostConstruct
@@ -33,8 +26,8 @@ public class ValidatorListener extends DefaultVisitListener {
     }
 
     @Override
-    public void visitStart(VisitContext context) {
-        QueryPart query = context.queryPart();
+    public void executeStart(ExecuteContext ctx) {
+        Query query = ctx.query();
         if (query instanceof InsertQueryImpl) {
             InsertQueryImpl insertQuery = (InsertQueryImpl) query;
             FieldMapsForInsert insertMaps = insertQuery.getInsertMaps();
@@ -53,6 +46,24 @@ public class ValidatorListener extends DefaultVisitListener {
                 Field field = entry.getKey();
                 Field<?> value = entry.getValue();
                 validate(field, Arrays.asList(value));
+            }
+        }
+    }
+
+
+    @Override
+    public void renderEnd(ExecuteContext ctx) {
+        Query query = ctx.query();
+        if (query instanceof UpdateQueryImpl) {
+            UpdateQueryImpl updateQuery = (UpdateQueryImpl) query;
+            if (!updateQuery.hasWhere()) {
+                throw new IllegalArgumentException("update without condition is forbidden!!");
+            }
+        }
+        if (query instanceof DeleteQueryImpl) {
+            DeleteQueryImpl deleteQuery = (DeleteQueryImpl) query;
+            if (!deleteQuery.hasWhere()) {
+                throw new IllegalArgumentException("delete without condition is forbidden!!");
             }
         }
     }

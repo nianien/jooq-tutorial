@@ -81,7 +81,7 @@ public class UserController {
     @GetMapping("/delete/{name}")
     public int delete(@PathVariable String name) {
         return dslContext.delete(ACCOUNT)
-                .where(ACCOUNT.NAME.eq(name))
+//                .where(ACCOUNT.NAME.eq(name))
                 .execute();
     }
 }

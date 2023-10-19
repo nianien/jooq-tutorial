@@ -32,8 +32,8 @@ public class JooqJdbcConfig {
                 .withRenderSchema(false)
                 .withRenderNameCase(RenderNameCase.AS_IS)
                 .withRenderQuotedNames(RenderQuotedNames.EXPLICIT_DEFAULT_UNQUOTED);
-        config.set(new TenantListener(), new ValidatorListener());
-        config.set(new PerformanceListener());
+//        config.set(new TenantListener());
+        config.set(new PerformanceListener(), new ValidatorListener());
         return DSL.using(config);
     }
 
