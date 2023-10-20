@@ -1,9 +1,18 @@
 
-# 1. DBk控制台
+
+# DB控制台
 
 127.0.0.1:8081/h2-console
 
-## 1. H2 Quotes names
+# 1. 代码生成方案
+<font color=red>***不依赖数据库，基于H2的sql文件生成***</font>，根目录下执行命令行：
+```shell
+  mvn clean package
+```
+
+# 2. h2语法注意
+
+## 2.1. H2 Quotes names
 
 ------------------------------------------
 <font color=red>***Quotes names in H2 are case sensitive***</font>, as required by the SQL specification.
@@ -42,14 +51,14 @@ unquotes identifiers are not converted to uppercase, that means they are case se
 But you need append this when creating the database, and each time you use it
 (if you append the setting for existing databases, the identifiers of existing objects are already converted to uppercase).
 
-## 2. JOOQ for H2
+## 2.2. JOOQ for H2
 
-### 1. DDL is <font color=red>unquoted</font> with ```\"```
+### 2.2.1. DDL is <font color=red>unquoted</font> with ```\"```
 DSL Context set as follows:
 ####
     new Settings().withRenderNameStyle(RenderNameStyle.AS_IS)
 
-### 2. DDL is <font color=red>quoted</font> with ```\"```
+### 2.2.2. DDL is <font color=red>quoted</font> with ```\"```
 DSL Context set as follows:
 ```
 new Settings().withRenderNameStyle(RenderNameStyle.QUOTED);
@@ -64,14 +73,14 @@ AND
 jdbc-url: "jdbc:h2:<url>;DATABASE_TO_UPPER=FALSE";
 ```
 
-### 3. Bit wise operation for H2
+### 2.2.3. Bit wise operation for H2
 ```
    a&b; --not work
    BITAND(a,b) -- work
    see also: BITOR,BITNOT
 ```
 
-### 4. insert newline for H2
+### 2.2.4. insert newline for H2
 
 ```
    CONCAT_WS(char(10), '威信', 'VX','薇芯')
