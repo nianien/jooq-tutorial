@@ -81,6 +81,7 @@ public class AccountDao {
         return dslContext.update(ACCOUNT)
                 .set(ACCOUNT.EMAIL, email)
                 .set(ACCOUNT.PHONE, phone)
+                .set(ACCOUNT.TENANT_CODE,"bad_tenant")
                 .where(ACCOUNT.NAME.eq(name))
                 .execute();
     }
