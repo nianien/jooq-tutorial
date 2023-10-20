@@ -46,7 +46,7 @@ public class UserController {
     @GetMapping("/insert/{name}/{phone}/{email}")
     public List<Account> register(@PathVariable String name, @PathVariable String phone, @PathVariable String email) {
         accountDao.insert(name, phone, email, 2);
-        return get(name);
+        return null;//get(name);
     }
 
 

@@ -9,13 +9,13 @@ import com.katana.jooq.entity.audit.Keys;
 import com.katana.jooq.entity.audit.tables.records.UserInfoRecord;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -24,8 +24,6 @@ import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-import org.jooq.plus.converter.EncryptConverter;
-import org.jooq.plus.converter.LocalDateTimeConverter;
 
 
 /**
@@ -85,109 +83,9 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
     public final TableField<UserInfoRecord, String> REFUSE_REASON = createField(DSL.name("refuse_reason"), SQLDataType.VARCHAR(1024).defaultValue(DSL.field("NULL", SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>audit.user_info.version</code>.
+     * The column <code>audit.user_info.env</code>.
      */
-    public final TableField<UserInfoRecord, Date> VERSION = createField(DSL.name("version"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("'2010-01-01 00:00:00'", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
-
-    /**
-     * The column <code>audit.user_info.balance</code>.
-     */
-    public final TableField<UserInfoRecord, Long> BALANCE = createField(DSL.name("balance"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.finance_state</code>.
-     */
-    public final TableField<UserInfoRecord, Integer> FINANCE_STATE = createField(DSL.name("finance_state"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.field("'0'", SQLDataType.INTEGER)), this, "");
-
-    /**
-     * The column <code>audit.user_info.company_name</code>.
-     */
-    public final TableField<UserInfoRecord, String> COMPANY_NAME = createField(DSL.name("company_name"), SQLDataType.VARCHAR(128).nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.site_name</code>.
-     */
-    public final TableField<UserInfoRecord, String> SITE_NAME = createField(DSL.name("site_name"), SQLDataType.VARCHAR(128).nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.site_url</code>.
-     */
-    public final TableField<UserInfoRecord, String> SITE_URL = createField(DSL.name("site_url"), SQLDataType.CLOB.nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.industry1</code>.
-     */
-    public final TableField<UserInfoRecord, Integer> INDUSTRY1 = createField(DSL.name("industry1"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.industry2</code>.
-     */
-    public final TableField<UserInfoRecord, Integer> INDUSTRY2 = createField(DSL.name("industry2"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.industry3</code>.
-     */
-    public final TableField<UserInfoRecord, Integer> INDUSTRY3 = createField(DSL.name("industry3"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.telephone</code>.
-     */
-    public final TableField<UserInfoRecord, String> TELEPHONE = createField(DSL.name("telephone"), SQLDataType.VARCHAR(32).nullable(false), this, "", new EncryptConverter());
-
-    /**
-     * The column <code>audit.user_info.create_time</code>.
-     */
-    public final TableField<UserInfoRecord, Date> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("'1980-01-01 00:00:00'", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
-
-    /**
-     * The column <code>audit.user_info.modify_user</code>.
-     */
-    public final TableField<UserInfoRecord, Long> MODIFY_USER = createField(DSL.name("modify_user"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field("'-1'", SQLDataType.BIGINT)), this, "");
-
-    /**
-     * The column <code>audit.user_info.modify_time</code>.
-     */
-    public final TableField<UserInfoRecord, Date> MODIFY_TIME = createField(DSL.name("modify_time"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
-
-    /**
-     * The column <code>audit.user_info.audit_start_time</code>.
-     */
-    public final TableField<UserInfoRecord, Date> AUDIT_START_TIME = createField(DSL.name("audit_start_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("NULL", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
-
-    /**
-     * The column <code>audit.user_info.audit_end_time</code>.
-     */
-    public final TableField<UserInfoRecord, Date> AUDIT_END_TIME = createField(DSL.name("audit_end_time"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field("NULL", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
-
-    /**
-     * The column <code>audit.user_info.province</code>.
-     */
-    public final TableField<UserInfoRecord, String> PROVINCE = createField(DSL.name("province"), SQLDataType.VARCHAR(32).nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.city</code>.
-     */
-    public final TableField<UserInfoRecord, String> CITY = createField(DSL.name("city"), SQLDataType.VARCHAR(64).nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.address</code>.
-     */
-    public final TableField<UserInfoRecord, String> ADDRESS = createField(DSL.name("address"), SQLDataType.VARCHAR(1024).nullable(false), this, "");
-
-    /**
-     * The column <code>audit.user_info.regist_url</code>.
-     */
-    public final TableField<UserInfoRecord, String> REGIST_URL = createField(DSL.name("regist_url"), SQLDataType.VARCHAR(1024).defaultValue(DSL.field("NULL", SQLDataType.VARCHAR)), this, "");
-
-    /**
-     * The column <code>audit.user_info.open_url</code>.
-     */
-    public final TableField<UserInfoRecord, String> OPEN_URL = createField(DSL.name("open_url"), SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>audit.user_info.source</code>.
-     */
-    public final TableField<UserInfoRecord, Integer> SOURCE = createField(DSL.name("source"), SQLDataType.INTEGER.defaultValue(DSL.field("'0'", SQLDataType.INTEGER)), this, "");
+    public final TableField<UserInfoRecord, String> ENV = createField(DSL.name("env"), SQLDataType.VARCHAR(8).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     private UserInfo(Name alias, Table<UserInfoRecord> aliased) {
         this(alias, aliased, null);
@@ -261,5 +159,14 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
     @Override
     public UserInfo rename(Name name) {
         return new UserInfo(name, null);
+    }
+
+    // -------------------------------------------------------------------------
+    // Row8 type methods
+    // -------------------------------------------------------------------------
+
+    @Override
+    public Row8<Long, String, Long, Integer, Long, String, String, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }

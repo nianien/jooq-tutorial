@@ -5,7 +5,6 @@ package com.katana.jooq.entity.audit.tables.pojos;
 
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 /**
@@ -23,27 +22,7 @@ public class UserInfo implements Serializable {
     private Long    auditorId;
     private String  reasonCode;
     private String  refuseReason;
-    private Date    version;
-    private Long    balance;
-    private Integer financeState;
-    private String  companyName;
-    private String  siteName;
-    private String  siteUrl;
-    private Integer industry1;
-    private Integer industry2;
-    private Integer industry3;
-    private String  telephone;
-    private Date    createTime;
-    private Long    modifyUser;
-    private Date    modifyTime;
-    private Date    auditStartTime;
-    private Date    auditEndTime;
-    private String  province;
-    private String  city;
-    private String  address;
-    private String  registUrl;
-    private String  openUrl;
-    private Integer source;
+    private String  env;
 
     public UserInfo() {}
 
@@ -55,27 +34,7 @@ public class UserInfo implements Serializable {
         this.auditorId = value.auditorId;
         this.reasonCode = value.reasonCode;
         this.refuseReason = value.refuseReason;
-        this.version = value.version;
-        this.balance = value.balance;
-        this.financeState = value.financeState;
-        this.companyName = value.companyName;
-        this.siteName = value.siteName;
-        this.siteUrl = value.siteUrl;
-        this.industry1 = value.industry1;
-        this.industry2 = value.industry2;
-        this.industry3 = value.industry3;
-        this.telephone = value.telephone;
-        this.createTime = value.createTime;
-        this.modifyUser = value.modifyUser;
-        this.modifyTime = value.modifyTime;
-        this.auditStartTime = value.auditStartTime;
-        this.auditEndTime = value.auditEndTime;
-        this.province = value.province;
-        this.city = value.city;
-        this.address = value.address;
-        this.registUrl = value.registUrl;
-        this.openUrl = value.openUrl;
-        this.source = value.source;
+        this.env = value.env;
     }
 
     public UserInfo(
@@ -86,27 +45,7 @@ public class UserInfo implements Serializable {
         Long    auditorId,
         String  reasonCode,
         String  refuseReason,
-        Date    version,
-        Long    balance,
-        Integer financeState,
-        String  companyName,
-        String  siteName,
-        String  siteUrl,
-        Integer industry1,
-        Integer industry2,
-        Integer industry3,
-        String  telephone,
-        Date    createTime,
-        Long    modifyUser,
-        Date    modifyTime,
-        Date    auditStartTime,
-        Date    auditEndTime,
-        String  province,
-        String  city,
-        String  address,
-        String  registUrl,
-        String  openUrl,
-        Integer source
+        String  env
     ) {
         this.userid = userid;
         this.name = name;
@@ -115,27 +54,7 @@ public class UserInfo implements Serializable {
         this.auditorId = auditorId;
         this.reasonCode = reasonCode;
         this.refuseReason = refuseReason;
-        this.version = version;
-        this.balance = balance;
-        this.financeState = financeState;
-        this.companyName = companyName;
-        this.siteName = siteName;
-        this.siteUrl = siteUrl;
-        this.industry1 = industry1;
-        this.industry2 = industry2;
-        this.industry3 = industry3;
-        this.telephone = telephone;
-        this.createTime = createTime;
-        this.modifyUser = modifyUser;
-        this.modifyTime = modifyTime;
-        this.auditStartTime = auditStartTime;
-        this.auditEndTime = auditEndTime;
-        this.province = province;
-        this.city = city;
-        this.address = address;
-        this.registUrl = registUrl;
-        this.openUrl = openUrl;
-        this.source = source;
+        this.env = env;
     }
 
     /**
@@ -237,297 +156,17 @@ public class UserInfo implements Serializable {
     }
 
     /**
-     * Getter for <code>audit.user_info.version</code>.
+     * Getter for <code>audit.user_info.env</code>.
      */
-    public Date getVersion() {
-        return this.version;
+    public String getEnv() {
+        return this.env;
     }
 
     /**
-     * Setter for <code>audit.user_info.version</code>.
+     * Setter for <code>audit.user_info.env</code>.
      */
-    public void setVersion(Date version) {
-        this.version = version;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.balance</code>.
-     */
-    public Long getBalance() {
-        return this.balance;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.balance</code>.
-     */
-    public void setBalance(Long balance) {
-        this.balance = balance;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.finance_state</code>.
-     */
-    public Integer getFinanceState() {
-        return this.financeState;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.finance_state</code>.
-     */
-    public void setFinanceState(Integer financeState) {
-        this.financeState = financeState;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.company_name</code>.
-     */
-    public String getCompanyName() {
-        return this.companyName;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.company_name</code>.
-     */
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.site_name</code>.
-     */
-    public String getSiteName() {
-        return this.siteName;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.site_name</code>.
-     */
-    public void setSiteName(String siteName) {
-        this.siteName = siteName;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.site_url</code>.
-     */
-    public String getSiteUrl() {
-        return this.siteUrl;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.site_url</code>.
-     */
-    public void setSiteUrl(String siteUrl) {
-        this.siteUrl = siteUrl;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.industry1</code>.
-     */
-    public Integer getIndustry1() {
-        return this.industry1;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.industry1</code>.
-     */
-    public void setIndustry1(Integer industry1) {
-        this.industry1 = industry1;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.industry2</code>.
-     */
-    public Integer getIndustry2() {
-        return this.industry2;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.industry2</code>.
-     */
-    public void setIndustry2(Integer industry2) {
-        this.industry2 = industry2;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.industry3</code>.
-     */
-    public Integer getIndustry3() {
-        return this.industry3;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.industry3</code>.
-     */
-    public void setIndustry3(Integer industry3) {
-        this.industry3 = industry3;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.telephone</code>.
-     */
-    public String getTelephone() {
-        return this.telephone;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.telephone</code>.
-     */
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.create_time</code>.
-     */
-    public Date getCreateTime() {
-        return this.createTime;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.create_time</code>.
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.modify_user</code>.
-     */
-    public Long getModifyUser() {
-        return this.modifyUser;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.modify_user</code>.
-     */
-    public void setModifyUser(Long modifyUser) {
-        this.modifyUser = modifyUser;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.modify_time</code>.
-     */
-    public Date getModifyTime() {
-        return this.modifyTime;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.modify_time</code>.
-     */
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.audit_start_time</code>.
-     */
-    public Date getAuditStartTime() {
-        return this.auditStartTime;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.audit_start_time</code>.
-     */
-    public void setAuditStartTime(Date auditStartTime) {
-        this.auditStartTime = auditStartTime;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.audit_end_time</code>.
-     */
-    public Date getAuditEndTime() {
-        return this.auditEndTime;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.audit_end_time</code>.
-     */
-    public void setAuditEndTime(Date auditEndTime) {
-        this.auditEndTime = auditEndTime;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.province</code>.
-     */
-    public String getProvince() {
-        return this.province;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.province</code>.
-     */
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.city</code>.
-     */
-    public String getCity() {
-        return this.city;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.city</code>.
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.address</code>.
-     */
-    public String getAddress() {
-        return this.address;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.address</code>.
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.regist_url</code>.
-     */
-    public String getRegistUrl() {
-        return this.registUrl;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.regist_url</code>.
-     */
-    public void setRegistUrl(String registUrl) {
-        this.registUrl = registUrl;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.open_url</code>.
-     */
-    public String getOpenUrl() {
-        return this.openUrl;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.open_url</code>.
-     */
-    public void setOpenUrl(String openUrl) {
-        this.openUrl = openUrl;
-    }
-
-    /**
-     * Getter for <code>audit.user_info.source</code>.
-     */
-    public Integer getSource() {
-        return this.source;
-    }
-
-    /**
-     * Setter for <code>audit.user_info.source</code>.
-     */
-    public void setSource(Integer source) {
-        this.source = source;
+    public void setEnv(String env) {
+        this.env = env;
     }
 
     @Override
@@ -541,27 +180,7 @@ public class UserInfo implements Serializable {
         sb.append(", ").append(auditorId);
         sb.append(", ").append(reasonCode);
         sb.append(", ").append(refuseReason);
-        sb.append(", ").append(version);
-        sb.append(", ").append(balance);
-        sb.append(", ").append(financeState);
-        sb.append(", ").append(companyName);
-        sb.append(", ").append(siteName);
-        sb.append(", ").append(siteUrl);
-        sb.append(", ").append(industry1);
-        sb.append(", ").append(industry2);
-        sb.append(", ").append(industry3);
-        sb.append(", ").append(telephone);
-        sb.append(", ").append(createTime);
-        sb.append(", ").append(modifyUser);
-        sb.append(", ").append(modifyTime);
-        sb.append(", ").append(auditStartTime);
-        sb.append(", ").append(auditEndTime);
-        sb.append(", ").append(province);
-        sb.append(", ").append(city);
-        sb.append(", ").append(address);
-        sb.append(", ").append(registUrl);
-        sb.append(", ").append(openUrl);
-        sb.append(", ").append(source);
+        sb.append(", ").append(env);
 
         sb.append(")");
         return sb.toString();

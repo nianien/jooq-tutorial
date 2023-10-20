@@ -5,7 +5,6 @@ import org.jooq.DataType;
 import org.jooq.ExecuteContext;
 import org.jooq.Field;
 import org.jooq.Query;
-import org.jooq.impl.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +21,7 @@ public class ValidatorListener extends DefaultExecuteListener {
 
 
     @Override
-    public void executeStart(ExecuteContext ctx) {
+    public void renderEnd(ExecuteContext ctx) {
         Query query = ctx.query();
         if (query instanceof InsertQueryImpl) {
             InsertQueryImpl insertQuery = (InsertQueryImpl) query;
@@ -44,12 +43,6 @@ public class ValidatorListener extends DefaultExecuteListener {
                 validate(field, Arrays.asList(value));
             }
         }
-    }
-
-
-    @Override
-    public void renderEnd(ExecuteContext ctx) {
-        Query query = ctx.query();
         if (query instanceof UpdateQueryImpl) {
             UpdateQueryImpl updateQuery = (UpdateQueryImpl) query;
             if (!updateQuery.hasWhere()) {
@@ -81,5 +74,6 @@ public class ValidatorListener extends DefaultExecuteListener {
             }
         }
     }
+
 
 }

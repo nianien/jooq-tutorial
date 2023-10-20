@@ -18,44 +18,44 @@ public class Account implements Serializable {
 
     private Long   id;
     private String name;
-    private String contact;
     private String phone;
     private String email;
     private Date   createTime;
     private Date   updateTime;
     private String tenantCode;
+    private String env;
 
     public Account() {}
 
     public Account(Account value) {
         this.id = value.id;
         this.name = value.name;
-        this.contact = value.contact;
         this.phone = value.phone;
         this.email = value.email;
         this.createTime = value.createTime;
         this.updateTime = value.updateTime;
         this.tenantCode = value.tenantCode;
+        this.env = value.env;
     }
 
     public Account(
         Long   id,
         String name,
-        String contact,
         String phone,
         String email,
         Date   createTime,
         Date   updateTime,
-        String tenantCode
+        String tenantCode,
+        String env
     ) {
         this.id = id;
         this.name = name;
-        this.contact = contact;
         this.phone = phone;
         this.email = email;
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.tenantCode = tenantCode;
+        this.env = env;
     }
 
     /**
@@ -84,20 +84,6 @@ public class Account implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * Getter for <code>uc.account.contact</code>.
-     */
-    public String getContact() {
-        return this.contact;
-    }
-
-    /**
-     * Setter for <code>uc.account.contact</code>.
-     */
-    public void setContact(String contact) {
-        this.contact = contact;
     }
 
     /**
@@ -170,18 +156,32 @@ public class Account implements Serializable {
         this.tenantCode = tenantCode;
     }
 
+    /**
+     * Getter for <code>uc.account.env</code>.
+     */
+    public String getEnv() {
+        return this.env;
+    }
+
+    /**
+     * Setter for <code>uc.account.env</code>.
+     */
+    public void setEnv(String env) {
+        this.env = env;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Account (");
 
         sb.append(id);
         sb.append(", ").append(name);
-        sb.append(", ").append(contact);
         sb.append(", ").append(phone);
         sb.append(", ").append(email);
         sb.append(", ").append(createTime);
         sb.append(", ").append(updateTime);
         sb.append(", ").append(tenantCode);
+        sb.append(", ").append(env);
 
         sb.append(")");
         return sb.toString();

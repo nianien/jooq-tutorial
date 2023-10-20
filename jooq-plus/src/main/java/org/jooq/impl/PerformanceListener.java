@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.jooq.ExecuteContext;
 import org.jooq.conf.SettingsTools;
-import org.jooq.impl.DSL;
-import org.jooq.impl.DefaultExecuteListener;
 import org.jooq.tools.StopWatch;
 
 import java.util.ArrayList;
@@ -27,7 +25,6 @@ public class PerformanceListener extends DefaultExecuteListener {
     private static final ThreadLocal<List<String>> SQL_QUERIES = ThreadLocal.withInitial(() -> new ArrayList<>());
     private static final ThreadLocal<StopWatch> STOP_WATCH = ThreadLocal.withInitial(() -> new StopWatch());
 
-
     @Override
     public void start(ExecuteContext ctx) {
         //init for every outer call on this thread, not every invocation of this method
@@ -37,31 +34,59 @@ public class PerformanceListener extends DefaultExecuteListener {
 
     @Override
     public void renderEnd(ExecuteContext ctx) {
-
-        // Create a new DSLContext for logging rendering purposes
-        DSLContext dslContext = DSL.using(ctx.dialect(),
-                SettingsTools.clone(ctx.settings()).withRenderFormatted(false));
-        if (ctx.query() != null) {
-            String sql = dslContext.renderInlined(ctx.query());
-            SQL_QUERIES.get().add(sql);
+        try {
+            // Create a new DSLContext for logging rendering purposes
+            DSLContext dslContext = DSL.using(ctx.dialect(),
+                    SettingsTools.clone(ctx.settings()).withRenderFormatted(false));
+            if (ctx.query() != null) {
+                String sql = dslContext.renderInlined(ctx.query());
+                SQL_QUERIES.get().add(sql);
+            }
+        } catch (Exception e) {
+            //ignore
         }
     }
 
 
     @Override
     public void executeEnd(ExecuteContext ctx) {
-        StopWatch sw = STOP_WATCH.get();
-        String format = StopWatch.format(sw.split());
-        //enable show-sql or exists slow-query
-        if (SHOW_SQL || sw.split() > TimeUnit.MILLISECONDS.toNanos(SLOW_QUERY_TIME)) {
-            List<String> list = SQL_QUERIES.get();
-            if (list.size() > 0) {
-                log.info("sql query by jooq cost {}:\n{}", format, list);
+        try {
+            StopWatch sw = STOP_WATCH.get();
+            String format = StopWatch.format(sw.split());
+            //enable show-sql or exists slow-query
+            if (SHOW_SQL || sw.split() > TimeUnit.MILLISECONDS.toNanos(SLOW_QUERY_TIME)) {
+                List<String> list = SQL_QUERIES.get();
+                if (list.size() > 0) {
+                    log.info("sql query by jooq cost {}:\n{}", format, list);
+                }
             }
+            SQL_QUERIES.remove();
+            STOP_WATCH.remove();
+        } catch (Exception e) {
+            //ignore
         }
-        SQL_QUERIES.remove();
-        STOP_WATCH.remove();
     }
 
+
+    @Override
+    public void exception(ExecuteContext ctx) {
+        try {
+            StopWatch sw = STOP_WATCH.get();
+            List<String> sqlList = SQL_QUERIES.get();
+            List<String> failedList = new ArrayList<>();
+            if (sqlList.size() > 0) {
+                failedList.add(sqlList.remove(sqlList.size() - 1));
+            }
+            String format = StopWatch.format(sw.split());
+            //enable show-sql or exists slow-query
+            if (SHOW_SQL || sw.split() > TimeUnit.MILLISECONDS.toNanos(SLOW_QUERY_TIME)) {
+                log.info("sql query by jooq cost {}:\nsucceed:{}\nfailed:{}", format, sqlList, failedList);
+            }
+            SQL_QUERIES.remove();
+            STOP_WATCH.remove();
+        } catch (Exception e) {
+            //ignore
+        }
+    }
 
 }

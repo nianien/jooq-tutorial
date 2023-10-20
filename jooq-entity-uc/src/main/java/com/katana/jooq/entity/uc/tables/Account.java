@@ -62,11 +62,6 @@ public class Account extends TableImpl<AccountRecord> {
     public final TableField<AccountRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(16).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>uc.account.contact</code>.
-     */
-    public final TableField<AccountRecord, String> CONTACT = createField(DSL.name("contact"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
-
-    /**
      * The column <code>uc.account.phone</code>.
      */
     public final TableField<AccountRecord, String> PHONE = createField(DSL.name("phone"), SQLDataType.VARCHAR(13).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "", new EncryptConverter());
@@ -90,6 +85,11 @@ public class Account extends TableImpl<AccountRecord> {
      * The column <code>uc.account.tenant_code</code>.
      */
     public final TableField<AccountRecord, String> TENANT_CODE = createField(DSL.name("tenant_code"), SQLDataType.VARCHAR(8).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>uc.account.env</code>.
+     */
+    public final TableField<AccountRecord, String> ENV = createField(DSL.name("env"), SQLDataType.VARCHAR(8).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     private Account(Name alias, Table<AccountRecord> aliased) {
         this(alias, aliased, null);
@@ -175,7 +175,7 @@ public class Account extends TableImpl<AccountRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Long, String, String, String, String, Date, Date, String> fieldsRow() {
+    public Row8<Long, String, String, String, Date, Date, String, String> fieldsRow() {
         return (Row8) super.fieldsRow();
     }
 }
