@@ -17,12 +17,12 @@
         </dependency>
         <dependency>
             <groupId>com.tengzhe</groupId>
-            <artifactId>jooq-data-audit</artifactId>
+            <artifactId>jooq-entity-audit</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.tengzhe</groupId>
-            <artifactId>jooq-data-uc</artifactId>
+            <artifactId>jooq-entity-uc</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

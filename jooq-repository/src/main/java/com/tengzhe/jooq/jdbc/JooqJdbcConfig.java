@@ -1,5 +1,8 @@
 package com.tengzhe.jooq.jdbc;
 
+import org.jooq.impl.PerformanceListener;
+import org.jooq.impl.TenantListener;
+import org.jooq.impl.ValidatorListener;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.RenderNameCase;
@@ -32,7 +35,7 @@ public class JooqJdbcConfig {
                 .withRenderSchema(false)
                 .withRenderNameCase(RenderNameCase.AS_IS)
                 .withRenderQuotedNames(RenderQuotedNames.EXPLICIT_DEFAULT_UNQUOTED);
-        config.set(new PerformanceListener()/*, new TenantListener(), new ValidatorListener()*/);
+        config.set(new PerformanceListener(), new TenantListener(), new ValidatorListener());
         return DSL.using(config);
     }
 
