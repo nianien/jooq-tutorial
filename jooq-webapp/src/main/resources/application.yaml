@@ -1,6 +1,6 @@
 spring:
   application:
-    name: jooq-tutorial
+    name: katana-jooq
   h2:
     console:
       enabled: true

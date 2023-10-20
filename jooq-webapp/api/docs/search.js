@@ -15,7 +15,7 @@ api[0].list.push({
 api[0].list[0].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://localhost:63342/jooq-tutorial/jooq-test/api/docs',
+    url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs',
     desc: '首页',
 });
 api[0].list.push({
@@ -28,25 +28,25 @@ api[0].list.push({
 api[0].list[1].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://localhost:63342/jooq-tutorial/jooq-test/api/docs/users/{name}',
+    url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/{name}',
     desc: '查询用户',
 });
 api[0].list[1].list.push({
     order: '2',
     deprecated: 'false',
-    url: 'http://localhost:63342/jooq-tutorial/jooq-test/api/docs/users/insert/{name}/{phone}/{email}',
+    url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/insert/{name}/{phone}/{email}',
     desc: '注册用户',
 });
 api[0].list[1].list.push({
     order: '3',
     deprecated: 'false',
-    url: 'http://localhost:63342/jooq-tutorial/jooq-test/api/docs/users/update/{name}/{phone}/{email}',
+    url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/update/{name}/{phone}/{email}',
     desc: '修改用户',
 });
 api[0].list[1].list.push({
     order: '4',
     deprecated: 'false',
-    url: 'http://localhost:63342/jooq-tutorial/jooq-test/api/docs/users/delete/{name}',
+    url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/delete/{name}',
     desc: '用户查询',
 });
 document.onkeydown = keyDownSearch;
