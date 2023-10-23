@@ -31,5 +31,16 @@ CREATE TABLE `user_info` (
   KEY `idx_audit_start_time` (`audit_start_time`)*/
 ); /*ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户基础信息表'*/
 
-insert into `account` (`name`, `phone`, `email`, `tenant_code`, `env`)
-values ('jack', '13888888888', '138@138.com', 'uc', 'dev');
+CREATE TABLE `user_info_config` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `userid` bigint(20) NOT NULL COMMENT '用户id',
+    `priority` bigint(20) NOT NULL DEFAULT '0' COMMENT '优先级：-1表示搁置、0正常、>0表示优审，优审账户的物料会被优先领取（priority desc）',
+    `max_version` bigint(20) NOT NULL DEFAULT '0' COMMENT '最大版本号',
+    `min_version` bigint(20) NOT NULL DEFAULT '0' COMMENT '最小版本，主要是在领单时用，min_version越小表示需要优先领取',
+    `create_time` timestamp NOT NULL DEFAULT '2010-01-01 00:00:00' COMMENT '创建时间',
+    `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    `auditor_id` bigint(20) NOT NULL DEFAULT '-1' COMMENT '审核员id:-1表示未被任何审核员修改优先级，>0表示最后修改优先级的审核员id',
+    PRIMARY KEY (`id`)/*,
+  UNIQUE KEY `userid` (`userid`) USING BTREE,
+  KEY `priority` (`priority`,`min_version`) USING BTREE*/
+);/* ENGINE=InnoDB  DEFAULT CHARSET=utf8*/

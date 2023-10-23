@@ -30,9 +30,20 @@ public class UserController {
      * @param name 用户名
      * @return
      */
+    @GetMapping("/find/{name}")
+    public List<Account> find(@PathVariable String name) {
+        return accountDao.find(name);
+    }
+
+    /**
+     * 查询用户
+     *
+     * @param name 用户名
+     * @return
+     */
     @GetMapping("/{name}")
     public List<Account> get(@PathVariable String name) {
-        return accountDao.find(name);
+        return accountDao.get(name);
     }
 
     /**
@@ -46,7 +57,7 @@ public class UserController {
     @GetMapping("/insert/{name}/{phone}/{email}")
     public List<Account> register(@PathVariable String name, @PathVariable String phone, @PathVariable String email) {
         accountDao.insert(name, phone, email, 2);
-        return null;//get(name);
+        return get(name);
     }
 
 

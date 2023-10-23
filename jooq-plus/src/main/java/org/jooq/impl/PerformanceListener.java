@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 基于jooq的数据库执行性能监听器
+ * 基于jooq的数据库执行性能监听器，支持批量SQL
  *
  * @author liyifei
  */

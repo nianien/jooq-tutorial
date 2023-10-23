@@ -32,10 +32,8 @@ public class JooqJdbcConfig {
                 .withRenderSchema(false)
                 .withRenderNameCase(RenderNameCase.AS_IS)
                 .withRenderQuotedNames(RenderQuotedNames.EXPLICIT_DEFAULT_UNQUOTED);
-        config.set(new PerformanceListener()
-                , new FieldAppendListener(new String[]{"tenant_code", "default"}, new String[]{"env", "local"})
-                , new ValidatorListener()
-        );
+        config.set(new PerformanceListener(), new FieldValidateListener());
+        config.set(new FieldCompleteListener(new String[]{"tenant_code", "default"}, new String[]{"env", "local"}));
         return DSL.using(config);
     }
 

@@ -12,12 +12,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 基于jooq的数据库执行性能监听器
+ * 针对SQL写入字段进行校验，避免DB服务端异常
  *
  * @author xujin.wxj
  */
 @Slf4j
-public class ValidatorListener extends DefaultExecuteListener {
+public class FieldValidateListener extends DefaultExecuteListener {
 
 
     @Override

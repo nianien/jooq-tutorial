@@ -1,5 +1,6 @@
 package org.jooq.impl;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.*;
 
@@ -10,7 +11,17 @@ import java.util.Map;
 
 import static org.jooq.impl.DSL.val;
 
+/**
+ * 动态改写SQL，如用于租户隔离或环境隔离等场景，能够自动根据上下文对SQL进行改写，保证数据安全性和隔离性，支持多个字段
+ * <p/>
+ * <p>
+ * 针对insert/update语句，自动追加或覆盖指定字段值，支持嵌套查询：如insert...select，update...where<p/>
+ * 针对select/delete语句，自动追加或覆盖匹配条件，支持union/join/subquery等复杂场景
+ *
+ * @deprecated replaced by {@link FieldCompleteListener}
+ */
 @Slf4j
+@Deprecated
 public class FieldAppendListener extends DefaultExecuteListener {
 
 
@@ -126,7 +137,27 @@ public class FieldAppendListener extends DefaultExecuteListener {
                 });
             }
         }
+        //是否存在union语句
+        if (selectQuery.hasUnions()) {
+            try {
+                List<QueryPartList<Select<?>>> selectList = getUnions(selectQuery);
+                for (QueryPartList<Select<?>> selects : selectList) {
+                    List<Select<?>> wrapped = selects.wrapped();
+                    for (Select<?> select : wrapped) {
+                        if (select instanceof SelectImpl) {
+                            Query delegate = ((SelectImpl) select).getDelegate();
+                            if (delegate instanceof SelectQueryImpl) {
+                                handle((SelectQueryImpl) delegate);
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
+
 
     private void handle(Condition condition) {
         if (condition instanceof CombinedCondition) {
@@ -176,6 +207,18 @@ public class FieldAppendListener extends DefaultExecuteListener {
             list.add(targetValue(field));
         }
         return list;
+    }
+
+
+    @SneakyThrows
+    private List<QueryPartList<Select<?>>> getUnions(SelectQueryImpl selectQuery) {
+        try {
+            java.lang.reflect.Field field = SelectQueryImpl.class.getDeclaredField("union");
+            field.setAccessible(true);
+            return (List<QueryPartList<Select<?>>>) field.get(selectQuery);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
