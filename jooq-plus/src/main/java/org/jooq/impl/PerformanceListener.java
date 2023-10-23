@@ -18,11 +18,23 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class PerformanceListener implements DefaultListener {
 
+    /**
+     * 是否显示执行的SQL
+     */
     private static final boolean SHOW_SQL = Boolean.valueOf(System.getProperty("jooq.show-sql", "true"));
 
+    /**
+     * 慢SQL的阈值
+     */
     private static final long SLOW_QUERY_TIME = Long.valueOf(System.getProperty("jooq.slow-query-time", "1000"));
 
+    /**
+     * 存储当前执行的SQL列表
+     */
     private static final ThreadLocal<List<String>> SQL_QUERIES = ThreadLocal.withInitial(() -> new ArrayList<>());
+    /**
+     * 整体SQL请求的计时器
+     */
     private static final ThreadLocal<StopWatch> STOP_WATCH = ThreadLocal.withInitial(() -> new StopWatch());
 
     @Override
