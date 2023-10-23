@@ -1,6 +1,6 @@
 package com.katana.webapp.filter;
 
-import org.jooq.impl.FieldAppendListener;
+import org.jooq.impl.FieldCompleteListener;
 import org.jooq.tools.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -26,8 +26,8 @@ public class HeaderFilter extends HttpFilter {
         String tenantCode = request.getHeader("tenant_code");
         String env = request.getHeader("env");
         if (!StringUtils.isEmpty(tenantCode)) {
-            FieldAppendListener.setFieldValue("tenant_code", tenantCode);
-            FieldAppendListener.setFieldValue("env", env);
+            FieldCompleteListener.setFieldValue("tenant_code", tenantCode);
+            FieldCompleteListener.setFieldValue("env", env);
         }
         super.doFilter(request, response, chain);
     }

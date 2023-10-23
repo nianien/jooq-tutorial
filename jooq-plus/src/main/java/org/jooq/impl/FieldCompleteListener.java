@@ -3,7 +3,10 @@ package org.jooq.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.jooq.impl.DSL.val;
 
@@ -11,20 +14,25 @@ import static org.jooq.impl.DSL.val;
  * 动态改写SQL，自动插入指定字段或追加字段匹配条件，支持多个字段<p/>
  * 可用于租户隔离或环境隔离等场景，能够自动根据上下文对SQL进行改写，保证数据安全性和隔离性
  * <p/>
- * 针对insert/update语句，自动追加或覆盖指定字段值，支持嵌套查询：如insert...select，update...where<p/>
- * 针对select/delete语句，自动追加或覆盖匹配条件，支持union/join/subquery等复杂场景
+ * 针对insert/update语句，自动追加或覆盖指定字段值，支持嵌套查询：如insert...select，update...where-select<p/>
+ * 针对select/delete语句，自动追加或覆盖匹配条件，支持union/join/subquery等复杂场景<p/>
+ * <p/>
+ * 注意: 该类需要作为ExecuteListener/VisitListener同时配置才能使用
  */
 @Slf4j
-public class FieldCompleteListener extends DefaultVisitListener {
+public class FieldCompleteListener extends DefaultVisitListener implements ExecuteListener {
 
     /**
      * 避免重复处理，使用WeakHashMap,在SQL处理完被移除
      */
-    private Map<VisitContext, Map<Integer, Boolean>> visitedMap = Collections.synchronizedMap(new WeakHashMap());
+    private ThreadLocal<Map<Integer, Boolean>> visitedMap = ThreadLocal.withInitial(() -> new HashMap<>());
     /**
      * 需要自动补齐的字段
      */
     private Map<String, Field<String>> AUTO_FIELDS = new HashMap<>();
+    /**
+     * 需要补齐字段的默认值
+     */
     private static final Map<String, ThreadLocal<Param<String>>> DEFAULT_VALUES = new HashMap<>();
 
     /**
@@ -50,7 +58,8 @@ public class FieldCompleteListener extends DefaultVisitListener {
                 || query instanceof SelectQueryImpl) {
             try {
                 //在打印日志时会重复访问VisitContext,避免重复改写SQL
-                if (visitedMap.computeIfAbsent(ctx, (k) -> new HashMap<>()).putIfAbsent(System.identityHashCode(query), true) == null) {
+                //同一个线程不会有并发问题, 同一个query只会被改写一次
+                if (visitedMap.get().putIfAbsent(System.identityHashCode(query), true) == null) {
                     rewriteQuery(query, AUTO_FIELDS);
                 }
             } catch (Exception e) {
@@ -66,7 +75,6 @@ public class FieldCompleteListener extends DefaultVisitListener {
      * @param query
      */
     private void rewriteQuery(QueryPart query, Map<String, Field<String>> autoFields) {
-        log.info("==>queryPart: {}@{}", query.getClass().getName(), Integer.toHexString(System.identityHashCode(query)));
         //插入时,自动插入tenant_code
         if (query instanceof InsertQueryImpl) {
             InsertQueryImpl insertQuery = (InsertQueryImpl) query;
@@ -175,4 +183,104 @@ public class FieldCompleteListener extends DefaultVisitListener {
         return null;
     }
 
+    @Override
+    public void start(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void renderStart(ExecuteContext ctx) {
+        //初始化visitedMap，用于重复判定，保证SQL请求只会重写一次
+        visitedMap.get();
+    }
+
+    @Override
+    public void renderEnd(ExecuteContext ctx) {
+        //移除visitedMap，用于处理新的SQL请求
+        visitedMap.remove();
+    }
+
+    @Override
+    public void prepareStart(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void prepareEnd(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void bindStart(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void bindEnd(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void executeStart(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void executeEnd(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void outStart(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void outEnd(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void fetchStart(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void resultStart(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void recordStart(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void recordEnd(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void resultEnd(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void fetchEnd(ExecuteContext ctx) {
+
+    }
+
+    @Override
+    public void end(ExecuteContext ctx) {
+    }
+
+    @Override
+    public void exception(ExecuteContext ctx) {
+        visitedMap.remove();
+    }
+
+    @Override
+    public void warning(ExecuteContext ctx) {
+
+    }
 }

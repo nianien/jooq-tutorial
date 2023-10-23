@@ -25,10 +25,10 @@ public class AccountDao {
 
     public List<Account> find(String name) {
 
+
         com.katana.jooq.entity.uc.tables.Account ta = ACCOUNT.as("a");
         com.katana.jooq.entity.audit.tables.UserInfo tb = USER_INFO.as("b");
         com.katana.jooq.entity.audit.tables.UserInfoConfig td = USER_INFO_CONFIG.as("d");
-
         // join subquery and where subquery
         return dslContext.select(ta.asterisk()).from(ta)
                 .join(
@@ -83,6 +83,7 @@ public class AccountDao {
                 .set(ACCOUNT.PHONE, phone)
                 .set(ACCOUNT.TENANT_CODE, "bad_tenant")
                 .where(ACCOUNT.NAME.eq(name))
+                .and(ACCOUNT.ID.in(dslContext.select(USER_INFO.USERID).from(USER_INFO).where(USER_INFO.USERID.ge(0L))))
                 .execute();
     }
 

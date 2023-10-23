@@ -28,23 +28,29 @@ api[0].list.push({
 api[0].list[1].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/{name}',
+    url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/find/{name}',
     desc: '查询用户',
 });
 api[0].list[1].list.push({
     order: '2',
     deprecated: 'false',
+    url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/{name}',
+    desc: '查询用户',
+});
+api[0].list[1].list.push({
+    order: '3',
+    deprecated: 'false',
     url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/insert/{name}/{phone}/{email}',
     desc: '注册用户',
 });
 api[0].list[1].list.push({
-    order: '3',
+    order: '4',
     deprecated: 'false',
     url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/update/{name}/{phone}/{email}',
     desc: '修改用户',
 });
 api[0].list[1].list.push({
-    order: '4',
+    order: '5',
     deprecated: 'false',
     url: 'http://localhost:63342/katana-jooq/jooq-test/api/docs/users/delete/{name}',
     desc: '用户查询',

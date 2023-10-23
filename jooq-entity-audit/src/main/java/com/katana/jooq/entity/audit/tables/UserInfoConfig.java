@@ -17,7 +17,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row8;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -89,6 +89,11 @@ public class UserInfoConfig extends TableImpl<UserInfoConfigRecord> {
      * The column <code>audit.user_info_config.auditor_id</code>.
      */
     public final TableField<UserInfoConfigRecord, Long> AUDITOR_ID = createField(DSL.name("auditor_id"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field("'-1'", SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>audit.user_info_config.env</code>.
+     */
+    public final TableField<UserInfoConfigRecord, String> ENV = createField(DSL.name("env"), SQLDataType.VARCHAR(8).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     private UserInfoConfig(Name alias, Table<UserInfoConfigRecord> aliased) {
         this(alias, aliased, null);
@@ -170,11 +175,11 @@ public class UserInfoConfig extends TableImpl<UserInfoConfigRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Long, Long, Long, Long, Long, Date, Date, Long> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row9<Long, Long, Long, Long, Long, Date, Date, Long, String> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 }

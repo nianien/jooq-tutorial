@@ -15,10 +15,10 @@ import static org.jooq.impl.DSL.val;
  * 动态改写SQL，如用于租户隔离或环境隔离等场景，能够自动根据上下文对SQL进行改写，保证数据安全性和隔离性，支持多个字段
  * <p/>
  * <p>
- * 针对insert/update语句，自动追加或覆盖指定字段值，支持嵌套查询：如insert...select，update...where<p/>
+ * 针对insert/update语句，自动追加或覆盖指定字段值，支持嵌套查询：如insert...select，update...where-select<p/>
  * 针对select/delete语句，自动追加或覆盖匹配条件，支持union/join/subquery等复杂场景
  *
- * @deprecated replaced by {@link FieldCompleteListener}
+ * @deprecated  该类支持场景有限，有些场景不支持（如：insert...select，update...where），推荐使用{@link FieldCompleteListener}
  */
 @Slf4j
 @Deprecated
@@ -68,6 +68,7 @@ public class FieldAppendListener extends DefaultExecuteListener {
             Query query = ctx.query();
             //插入时,自动插入tenant_code
             if (query instanceof InsertQueryImpl) {
+                //FIXME: not support insert...select
                 InsertQueryImpl insertQuery = (InsertQueryImpl) query;
                 Table table = insertQuery.table();
                 TARGET_FIELDS.forEach((k, v) -> {
@@ -81,6 +82,7 @@ public class FieldAppendListener extends DefaultExecuteListener {
             }
             //更新时, 禁止tenant_code更新,增加tenant_code匹配
             if (query instanceof UpdateQueryImpl) {
+                //FIXME: not support update...where-select
                 UpdateQueryImpl updateQuery = (UpdateQueryImpl) query;
                 FieldMapForUpdate values = updateQuery.getValues();
                 Table<?> table = updateQuery.table();
@@ -128,11 +130,20 @@ public class FieldAppendListener extends DefaultExecuteListener {
                 targetTables.add(table);
             }
             for (Table t : targetTables) {
+                if(t instanceof TableAlias){
+                    Alias<? extends Table<?>> alias = ((TableAlias<?>) t).alias;
+                    if(alias.wrapped() instanceof DerivedTable){
+                        DerivedTable dt=(DerivedTable)alias.wrapped;
+                        Select query = dt.query();
+                        if(query instanceof SelectQueryImpl){
+                            handle((SelectQueryImpl)query);
+                        }
+                    }
+                }
                 TARGET_FIELDS.forEach((k, v) -> {
                     Field<String> field = t.field(v);
                     if (field != null) {
                         selectQuery.addConditions(field.eq(targetValue(field)));
-
                     }
                 });
             }

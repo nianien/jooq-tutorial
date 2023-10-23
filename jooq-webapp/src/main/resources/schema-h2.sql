@@ -40,6 +40,7 @@ CREATE TABLE `user_info_config` (
     `create_time` timestamp NOT NULL DEFAULT '2010-01-01 00:00:00' COMMENT '创建时间',
     `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
     `auditor_id` bigint(20) NOT NULL DEFAULT '-1' COMMENT '审核员id:-1表示未被任何审核员修改优先级，>0表示最后修改优先级的审核员id',
+    `env`       varchar(8) NOT NULL DEFAULT '' COMMENT '<环境>',
     PRIMARY KEY (`id`)/*,
   UNIQUE KEY `userid` (`userid`) USING BTREE,
   KEY `priority` (`priority`,`min_version`) USING BTREE*/

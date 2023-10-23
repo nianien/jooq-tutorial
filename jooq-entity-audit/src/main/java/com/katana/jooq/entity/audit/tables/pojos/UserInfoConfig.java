@@ -16,14 +16,15 @@ public class UserInfoConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-    private Long userid;
-    private Long priority;
-    private Long maxVersion;
-    private Long minVersion;
-    private Date createTime;
-    private Date modifyTime;
-    private Long auditorId;
+    private Long   id;
+    private Long   userid;
+    private Long   priority;
+    private Long   maxVersion;
+    private Long   minVersion;
+    private Date   createTime;
+    private Date   modifyTime;
+    private Long   auditorId;
+    private String env;
 
     public UserInfoConfig() {}
 
@@ -36,17 +37,19 @@ public class UserInfoConfig implements Serializable {
         this.createTime = value.createTime;
         this.modifyTime = value.modifyTime;
         this.auditorId = value.auditorId;
+        this.env = value.env;
     }
 
     public UserInfoConfig(
-        Long id,
-        Long userid,
-        Long priority,
-        Long maxVersion,
-        Long minVersion,
-        Date createTime,
-        Date modifyTime,
-        Long auditorId
+        Long   id,
+        Long   userid,
+        Long   priority,
+        Long   maxVersion,
+        Long   minVersion,
+        Date   createTime,
+        Date   modifyTime,
+        Long   auditorId,
+        String env
     ) {
         this.id = id;
         this.userid = userid;
@@ -56,6 +59,7 @@ public class UserInfoConfig implements Serializable {
         this.createTime = createTime;
         this.modifyTime = modifyTime;
         this.auditorId = auditorId;
+        this.env = env;
     }
 
     /**
@@ -170,6 +174,20 @@ public class UserInfoConfig implements Serializable {
         this.auditorId = auditorId;
     }
 
+    /**
+     * Getter for <code>audit.user_info_config.env</code>.
+     */
+    public String getEnv() {
+        return this.env;
+    }
+
+    /**
+     * Setter for <code>audit.user_info_config.env</code>.
+     */
+    public void setEnv(String env) {
+        this.env = env;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("UserInfoConfig (");
@@ -182,6 +200,7 @@ public class UserInfoConfig implements Serializable {
         sb.append(", ").append(createTime);
         sb.append(", ").append(modifyTime);
         sb.append(", ").append(auditorId);
+        sb.append(", ").append(env);
 
         sb.append(")");
         return sb.toString();
