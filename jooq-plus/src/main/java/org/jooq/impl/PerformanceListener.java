@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @author liyifei
  */
 @Slf4j
-public class PerformanceListener extends DefaultExecuteListener {
+public class PerformanceListener implements DefaultListener {
 
     private static final boolean SHOW_SQL = Boolean.valueOf(System.getProperty("jooq.show-sql", "true"));
 

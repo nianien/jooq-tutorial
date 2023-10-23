@@ -2,7 +2,6 @@ package com.katana.repository.jdbc;
 
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
-import org.jooq.VisitListener;
 import org.jooq.conf.RenderNameCase;
 import org.jooq.conf.RenderQuotedNames;
 import org.jooq.impl.*;
@@ -34,11 +33,11 @@ public class JooqJdbcConfig {
                 .withRenderNameCase(RenderNameCase.AS_IS)
                 .withRenderQuotedNames(RenderQuotedNames.EXPLICIT_DEFAULT_UNQUOTED);
         config.set(
-                new PerformanceListener(),
-                new FieldCompleteListener(new String[]{"tenant_code", "default"}, new String[]{"env", "local"}),
-                new FieldValidateListener()
+                new PerformanceListener().asExecuteListener(),
+                new FieldCompleteListener().asExecuteListener(),
+                new FieldValidateListener().asExecuteListener()
         );
-        config.set((VisitListener) new FieldCompleteListener(new String[]{"tenant_code", "default"}, new String[]{"env", "local"}));
+        config.set(new FieldCompleteListener(new String[]{"tenant_code", "default"}, new String[]{"env", "local"}).asVisitListener());
         return DSL.using(config);
     }
 

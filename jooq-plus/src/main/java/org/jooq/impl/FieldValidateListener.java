@@ -14,10 +14,10 @@ import java.util.Set;
 /**
  * 针对SQL写入字段进行校验，避免DB服务端异常
  *
- * @author xujin.wxj
+ * @author liyifei
  */
 @Slf4j
-public class FieldValidateListener extends DefaultExecuteListener {
+public class FieldValidateListener implements DefaultListener {
 
 
     @Override

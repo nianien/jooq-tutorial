@@ -18,9 +18,11 @@ import static org.jooq.impl.DSL.val;
  * 针对select/delete语句，自动追加或覆盖匹配条件，支持union/join/subquery等复杂场景<p/>
  * <p/>
  * 注意: 该类需要作为ExecuteListener/VisitListener同时配置才能使用
+ *
+ * @author liyifei
  */
 @Slf4j
-public class FieldCompleteListener extends DefaultVisitListener implements ExecuteListener {
+public class FieldCompleteListener implements DefaultListener {
 
     /**
      * 避免重复处理，使用WeakHashMap,在SQL处理完被移除
@@ -70,9 +72,10 @@ public class FieldCompleteListener extends DefaultVisitListener implements Execu
 
 
     /**
-     * 重写SQL
+     * 重写SQL，自动补齐匹配字段
      *
      * @param query
+     * @param autoFields
      */
     private void rewriteQuery(QueryPart query, Map<String, Field<String>> autoFields) {
         //插入时,自动插入tenant_code
@@ -185,93 +188,14 @@ public class FieldCompleteListener extends DefaultVisitListener implements Execu
 
     @Override
     public void start(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void renderStart(ExecuteContext ctx) {
         //初始化visitedMap，用于重复判定，保证SQL请求只会重写一次
         visitedMap.get();
     }
 
     @Override
-    public void renderEnd(ExecuteContext ctx) {
+    public void end(ExecuteContext ctx) {
         //移除visitedMap，用于处理新的SQL请求
         visitedMap.remove();
-    }
-
-    @Override
-    public void prepareStart(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void prepareEnd(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void bindStart(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void bindEnd(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void executeStart(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void executeEnd(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void outStart(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void outEnd(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void fetchStart(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void resultStart(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void recordStart(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void recordEnd(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void resultEnd(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void fetchEnd(ExecuteContext ctx) {
-
-    }
-
-    @Override
-    public void end(ExecuteContext ctx) {
     }
 
     @Override
@@ -279,8 +203,4 @@ public class FieldCompleteListener extends DefaultVisitListener implements Execu
         visitedMap.remove();
     }
 
-    @Override
-    public void warning(ExecuteContext ctx) {
-
-    }
 }
