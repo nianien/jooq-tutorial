@@ -1,4 +1,4 @@
-package org.jooq.plus.encryptor;
+package com.cudrania.jooq.encryptor;
 
 import java.util.ArrayList;
 import java.util.List;

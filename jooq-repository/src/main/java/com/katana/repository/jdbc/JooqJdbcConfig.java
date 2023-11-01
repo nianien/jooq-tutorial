@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.datasource.DelegatingDataSource;
 
 import javax.sql.DataSource;
 
@@ -27,7 +28,7 @@ public class JooqJdbcConfig {
                                      @Value("${spring.jooq.sql-dialect:MySQL}") SQLDialect sqlDialect) {
         DefaultConfiguration config = new DefaultConfiguration();
         config.setSQLDialect(sqlDialect);
-        config.setDataSource(dataSource);
+        config.setDataSource(new DelegatingDataSource(dataSource));
         config.settings()
                 .withRenderSchema(false)
                 .withRenderNameCase(RenderNameCase.AS_IS)

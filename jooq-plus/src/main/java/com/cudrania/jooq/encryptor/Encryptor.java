@@ -1,4 +1,4 @@
-package org.jooq.plus.encryptor;
+package com.cudrania.jooq.encryptor;
 
 /**
  * 加密接口定义

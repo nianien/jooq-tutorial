@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class JooqApplication {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(JooqJdbcConfig.class)
                 .profiles("jdbc")
                 .child(JooqApplication.class).web(WebApplicationType.SERVLET)

@@ -8,8 +8,8 @@ spring:
       settings:
         web-allow-others: false
 logging:
-  pattern:
-    console: "${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}@%line){cyan} %clr(:) %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+  pattern: #%class{36}.%M %L
+    console: "${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%40.40class{39}#%M@%line){cyan} %clr(:) %m%n}"
   level:
     root: info
     org.springframework.web: trace

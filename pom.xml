@@ -24,6 +24,7 @@
         <java.version>11</java.version>
         <jooq.version>3.14.15</jooq.version>
         <lombok.version>1.18.20</lombok.version>
+        <cudrania.version>1.0.4-jdk17</cudrania.version>
     </properties>
 
     <dependencyManagement>
@@ -44,6 +45,11 @@
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq</artifactId>
                 <version>${jooq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.nianien</groupId>
+                <artifactId>cudrania</artifactId>
+                <version>${cudrania.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
