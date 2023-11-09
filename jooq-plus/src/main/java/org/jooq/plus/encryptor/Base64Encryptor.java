@@ -1,4 +1,4 @@
-package com.cudrania.jooq.encryptor;
+package org.jooq.plus.encryptor;
 
 import java.util.Base64;
 

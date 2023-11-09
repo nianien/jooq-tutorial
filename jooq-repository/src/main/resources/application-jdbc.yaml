@@ -4,8 +4,10 @@ spring:
       platform: h2
       mode: embedded #never
   jooq:
-    sql-dialect: h2
+    sql-dialect: MYSQL
   datasource:
-    url: "jdbc:h2:mem:test"
-    username: sa
-    password: sa
+#    url: "jdbc:log4jdbc:h2:mem:test"
+    url: "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&logger=Slf4JLogger&profileSQL=true"
+    username: root
+    password: root
+#    driver-class-name: net.sf.log4jdbc.DriverSpy

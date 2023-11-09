@@ -23,6 +23,12 @@ public class AccountDao {
     @Resource
     private DSLContext dslContext;
 
+    public List<Account> abbr(Long[] idList) {
+        return dslContext.select().from(ACCOUNT)
+                .where(ACCOUNT.ID.in(idList))
+                .fetchInto(Account.class);
+    }
+
     public List<Account> find(String name) {
 
 

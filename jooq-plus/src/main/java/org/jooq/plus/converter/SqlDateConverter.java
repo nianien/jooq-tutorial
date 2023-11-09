@@ -1,4 +1,4 @@
-package com.cudrania.jooq.converter;
+package org.jooq.plus.converter;
 
 import org.jooq.Converter;
 

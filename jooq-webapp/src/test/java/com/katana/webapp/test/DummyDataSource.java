@@ -1,5 +1,6 @@
-package com.katana.webapp;
+package com.katana.webapp.test;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;

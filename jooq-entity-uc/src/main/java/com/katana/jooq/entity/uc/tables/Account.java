@@ -26,8 +26,8 @@ import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-import com.cudrania.jooq.converter.EncryptConverter;
-import com.cudrania.jooq.converter.LocalDateTimeConverter;
+import org.jooq.plus.converter.EncryptConverter;
+import org.jooq.plus.converter.LocalDateTimeConverter;
 
 
 /**

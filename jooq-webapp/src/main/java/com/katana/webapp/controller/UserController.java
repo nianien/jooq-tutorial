@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.LongStream;
 
 /**
  * 用户管理模块
@@ -22,6 +23,17 @@ public class UserController {
 
     @Resource
     private AccountDao accountDao;
+
+    /**
+     * 查询用户数
+     *
+     * @param limit 用户名
+     * @return
+     */
+    @GetMapping("/abbr/{limit}")
+    public List<Account> abbr(@PathVariable int limit) {
+        return accountDao.abbr(LongStream.range(1, limit + 1).mapToObj(e -> e).toArray(n -> new Long[n]));
+    }
 
 
     /**

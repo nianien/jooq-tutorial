@@ -1,5 +1,6 @@
 package com.katana.repository.jdbc;
 
+import ch.qos.logback.classic.PatternLayout;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.RenderNameCase;
@@ -16,8 +17,8 @@ import org.springframework.jdbc.datasource.DelegatingDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableAutoConfiguration
 public class JooqJdbcConfig {
+
 
     @Value("${spring.application.name:}")
     private String name;
@@ -34,7 +35,7 @@ public class JooqJdbcConfig {
                 .withRenderNameCase(RenderNameCase.AS_IS)
                 .withRenderQuotedNames(RenderQuotedNames.EXPLICIT_DEFAULT_UNQUOTED);
         config.set(
-                new PerformanceListener().asExecuteListener(),
+//                new PerformanceListener().asExecuteListener(),
                 new FieldCompleteListener().asExecuteListener(),
                 new FieldValidateListener().asExecuteListener()
         );

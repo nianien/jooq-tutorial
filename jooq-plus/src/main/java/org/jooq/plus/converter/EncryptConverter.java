@@ -1,7 +1,7 @@
-package com.cudrania.jooq.converter;
+package org.jooq.plus.converter;
 
-import com.cudrania.jooq.encryptor.Encryptor;
-import com.cudrania.jooq.encryptor.EncryptorProvider;
+import org.jooq.plus.encryptor.Encryptor;
+import org.jooq.plus.encryptor.EncryptorProvider;
 import org.jooq.Converter;
 
 /**

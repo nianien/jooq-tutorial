@@ -1,5 +1,6 @@
 package com.katana.webapp;
 
+import ch.qos.logback.classic.PatternLayout;
 import com.katana.repository.jdbc.JooqJdbcConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
@@ -15,16 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @SpringBootApplication(scanBasePackages = "com.katana")
-
 public class JooqApplication {
 
 
-    public static void main(String[] args) throws Exception {
-        ConfigurableApplicationContext context = new SpringApplicationBuilder(JooqJdbcConfig.class)
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = new SpringApplicationBuilder(JooqApplication.class)
                 .profiles("jdbc")
                 .child(JooqApplication.class).web(WebApplicationType.SERVLET)
                 .build().run(args);
-        System.out.println(context.getBean(JooqJdbcConfig.class));
+        System.out.println(context.getEnvironment());
     }
 
 
