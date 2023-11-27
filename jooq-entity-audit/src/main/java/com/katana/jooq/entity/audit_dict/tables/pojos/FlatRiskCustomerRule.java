@@ -185,14 +185,16 @@ public class FlatRiskCustomerRule implements Serializable {
     }
 
     /**
-     * Getter for <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
+     * Getter for
+     * <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
      */
     public String getEffectDatePeriod() {
         return this.effectDatePeriod;
     }
 
     /**
-     * Setter for <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
+     * Setter for
+     * <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
      */
     public void setEffectDatePeriod(String effectDatePeriod) {
         this.effectDatePeriod = effectDatePeriod;
@@ -227,14 +229,16 @@ public class FlatRiskCustomerRule implements Serializable {
     }
 
     /**
-     * Getter for <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
+     * Getter for
+     * <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
      */
     public Date getNextProcessTime() {
         return this.nextProcessTime;
     }
 
     /**
-     * Setter for <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
+     * Setter for
+     * <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
      */
     public void setNextProcessTime(Date nextProcessTime) {
         this.nextProcessTime = nextProcessTime;

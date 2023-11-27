@@ -122,14 +122,16 @@ public class FlatRiskCustomerRuleRecord extends UpdatableRecordImpl<FlatRiskCust
     }
 
     /**
-     * Setter for <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
+     * Setter for
+     * <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
      */
     public void setEffectDatePeriod(String value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
+     * Getter for
+     * <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
      */
     public String getEffectDatePeriod() {
         return (String) get(7);
@@ -164,14 +166,16 @@ public class FlatRiskCustomerRuleRecord extends UpdatableRecordImpl<FlatRiskCust
     }
 
     /**
-     * Setter for <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
+     * Setter for
+     * <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
      */
     public void setNextProcessTime(Date value) {
         set(10, value);
     }
 
     /**
-     * Getter for <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
+     * Getter for
+     * <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
      */
     public Date getNextProcessTime() {
         return (Date) get(10);
@@ -623,5 +627,30 @@ public class FlatRiskCustomerRuleRecord extends UpdatableRecordImpl<FlatRiskCust
         setModifyTime(modifyTime);
         setBucketType(bucketType);
         setAdResources(adResources);
+    }
+
+    /**
+     * Create a detached, initialised FlatRiskCustomerRuleRecord
+     */
+    public FlatRiskCustomerRuleRecord(com.katana.jooq.entity.audit_dict.tables.pojos.FlatRiskCustomerRule value) {
+        super(FlatRiskCustomerRule.FLAT_RISK_CUSTOMER_RULE);
+
+        if (value != null) {
+            setId(value.getId());
+            setRiskRuleId(value.getRiskRuleId());
+            setType(value.getType());
+            setUserid(value.getUserid());
+            setApplyProduct(value.getApplyProduct());
+            setHandleWay(value.getHandleWay());
+            setRegionCode(value.getRegionCode());
+            setEffectDatePeriod(value.getEffectDatePeriod());
+            setBlockingId(value.getBlockingId());
+            setLogicState(value.getLogicState());
+            setNextProcessTime(value.getNextProcessTime());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+            setBucketType(value.getBucketType());
+            setAdResources(value.getAdResources());
+        }
     }
 }

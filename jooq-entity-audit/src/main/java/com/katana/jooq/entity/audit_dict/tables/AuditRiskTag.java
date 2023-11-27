@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.AuditRiskTagRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -145,7 +143,7 @@ public class AuditRiskTag extends TableImpl<AuditRiskTagRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -156,11 +154,6 @@ public class AuditRiskTag extends TableImpl<AuditRiskTagRecord> {
     @Override
     public UniqueKey<AuditRiskTagRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_1;
-    }
-
-    @Override
-    public List<UniqueKey<AuditRiskTagRecord>> getKeys() {
-        return Arrays.<UniqueKey<AuditRiskTagRecord>>asList(Keys.CONSTRAINT_1);
     }
 
     @Override

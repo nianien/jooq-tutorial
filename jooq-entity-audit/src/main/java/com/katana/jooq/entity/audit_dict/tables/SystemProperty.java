@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.SystemPropertyRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -130,7 +128,7 @@ public class SystemProperty extends TableImpl<SystemPropertyRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -141,11 +139,6 @@ public class SystemProperty extends TableImpl<SystemPropertyRecord> {
     @Override
     public UniqueKey<SystemPropertyRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_4;
-    }
-
-    @Override
-    public List<UniqueKey<SystemPropertyRecord>> getKeys() {
-        return Arrays.<UniqueKey<SystemPropertyRecord>>asList(Keys.CONSTRAINT_4);
     }
 
     @Override

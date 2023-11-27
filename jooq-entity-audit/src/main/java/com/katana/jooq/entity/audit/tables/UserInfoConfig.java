@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit.Audit;
 import com.katana.jooq.entity.audit.Keys;
 import com.katana.jooq.entity.audit.tables.records.UserInfoConfigRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -130,7 +128,7 @@ public class UserInfoConfig extends TableImpl<UserInfoConfigRecord> {
 
     @Override
     public Schema getSchema() {
-        return Audit.AUDIT;
+        return aliased() ? null : Audit.AUDIT;
     }
 
     @Override
@@ -141,11 +139,6 @@ public class UserInfoConfig extends TableImpl<UserInfoConfigRecord> {
     @Override
     public UniqueKey<UserInfoConfigRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_1A;
-    }
-
-    @Override
-    public List<UniqueKey<UserInfoConfigRecord>> getKeys() {
-        return Arrays.<UniqueKey<UserInfoConfigRecord>>asList(Keys.CONSTRAINT_1A);
     }
 
     @Override

@@ -402,4 +402,23 @@ public class SystemPropertyRecord extends UpdatableRecordImpl<SystemPropertyReco
         setCreateTime(createTime);
         setModifyTime(modifyTime);
     }
+
+    /**
+     * Create a detached, initialised SystemPropertyRecord
+     */
+    public SystemPropertyRecord(com.katana.jooq.entity.audit_dict.tables.pojos.SystemProperty value) {
+        super(SystemProperty.SYSTEM_PROPERTY);
+
+        if (value != null) {
+            setId(value.getId());
+            setName(value.getName());
+            setValue(value.getValue());
+            setLabel(value.getLabel());
+            setGroup(value.getGroup());
+            setEnable(value.getEnable());
+            setRemark(value.getRemark());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
+    }
 }

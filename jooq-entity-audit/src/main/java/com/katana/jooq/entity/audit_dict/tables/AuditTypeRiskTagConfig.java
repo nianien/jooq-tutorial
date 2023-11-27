@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.AuditTypeRiskTagConfigRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -38,7 +36,8 @@ public class AuditTypeRiskTagConfig extends TableImpl<AuditTypeRiskTagConfigReco
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>audit_dict.audit_type_risk_tag_config</code>
+     * The reference instance of
+     * <code>audit_dict.audit_type_risk_tag_config</code>
      */
     public static final AuditTypeRiskTagConfig AUDIT_TYPE_RISK_TAG_CONFIG = new AuditTypeRiskTagConfig();
 
@@ -66,12 +65,14 @@ public class AuditTypeRiskTagConfig extends TableImpl<AuditTypeRiskTagConfigReco
     public final TableField<AuditTypeRiskTagConfigRecord, String> CODE = createField(DSL.name("code"), SQLDataType.VARCHAR(255).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
+     * The column
+     * <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
      */
     public final TableField<AuditTypeRiskTagConfigRecord, Date> CREATE_TIME = createField(DSL.name("create_time"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
 
     /**
-     * The column <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
+     * The column
+     * <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
      */
     public final TableField<AuditTypeRiskTagConfigRecord, Date> MODIFY_TIME = createField(DSL.name("modify_time"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
 
@@ -84,21 +85,24 @@ public class AuditTypeRiskTagConfig extends TableImpl<AuditTypeRiskTagConfigReco
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_type_risk_tag_config</code> table reference
+     * Create an aliased <code>audit_dict.audit_type_risk_tag_config</code>
+     * table reference
      */
     public AuditTypeRiskTagConfig(String alias) {
         this(DSL.name(alias), AUDIT_TYPE_RISK_TAG_CONFIG);
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_type_risk_tag_config</code> table reference
+     * Create an aliased <code>audit_dict.audit_type_risk_tag_config</code>
+     * table reference
      */
     public AuditTypeRiskTagConfig(Name alias) {
         this(alias, AUDIT_TYPE_RISK_TAG_CONFIG);
     }
 
     /**
-     * Create a <code>audit_dict.audit_type_risk_tag_config</code> table reference
+     * Create a <code>audit_dict.audit_type_risk_tag_config</code> table
+     * reference
      */
     public AuditTypeRiskTagConfig() {
         this(DSL.name("audit_type_risk_tag_config"), null);
@@ -110,7 +114,7 @@ public class AuditTypeRiskTagConfig extends TableImpl<AuditTypeRiskTagConfigReco
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -121,11 +125,6 @@ public class AuditTypeRiskTagConfig extends TableImpl<AuditTypeRiskTagConfigReco
     @Override
     public UniqueKey<AuditTypeRiskTagConfigRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_9;
-    }
-
-    @Override
-    public List<UniqueKey<AuditTypeRiskTagConfigRecord>> getKeys() {
-        return Arrays.<UniqueKey<AuditTypeRiskTagConfigRecord>>asList(Keys.CONSTRAINT_9);
     }
 
     @Override

@@ -513,4 +513,26 @@ public class AuditRiskTagRecord extends UpdatableRecordImpl<AuditRiskTagRecord> 
         setCreateTime(createTime);
         setModifyTime(modifyTime);
     }
+
+    /**
+     * Create a detached, initialised AuditRiskTagRecord
+     */
+    public AuditRiskTagRecord(com.katana.jooq.entity.audit_dict.tables.pojos.AuditRiskTag value) {
+        super(AuditRiskTag.AUDIT_RISK_TAG);
+
+        if (value != null) {
+            setId(value.getId());
+            setCode(value.getCode());
+            setTarget(value.getTarget());
+            setReasonDetail(value.getReasonDetail());
+            setAdditional(value.getAdditional());
+            setStrategyFlag(value.getStrategyFlag());
+            setEnabled(value.getEnabled());
+            setRemark(value.getRemark());
+            setOperatorId(value.getOperatorId());
+            setSeq(value.getSeq());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
+    }
 }

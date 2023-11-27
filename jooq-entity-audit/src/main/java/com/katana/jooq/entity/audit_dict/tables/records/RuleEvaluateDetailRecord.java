@@ -476,4 +476,25 @@ public class RuleEvaluateDetailRecord extends UpdatableRecordImpl<RuleEvaluateDe
         setEvalDate(evalDate);
         setCreateTime(createTime);
     }
+
+    /**
+     * Create a detached, initialised RuleEvaluateDetailRecord
+     */
+    public RuleEvaluateDetailRecord(com.katana.jooq.entity.audit_dict.tables.pojos.RuleEvaluateDetail value) {
+        super(RuleEvaluateDetail.RULE_EVALUATE_DETAIL);
+
+        if (value != null) {
+            setId(value.getId());
+            setEvalId(value.getEvalId());
+            setRuleId(value.getRuleId());
+            setUserId(value.getUserId());
+            setIdeaId(value.getIdeaId());
+            setContent(value.getContent());
+            setWord(value.getWord());
+            setConsume(value.getConsume());
+            setBizType(value.getBizType());
+            setEvalDate(value.getEvalDate());
+            setCreateTime(value.getCreateTime());
+        }
+    }
 }

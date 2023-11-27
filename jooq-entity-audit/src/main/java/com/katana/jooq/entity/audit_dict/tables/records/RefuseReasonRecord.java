@@ -513,4 +513,26 @@ public class RefuseReasonRecord extends UpdatableRecordImpl<RefuseReasonRecord> 
         setShowStatus(showStatus);
         setCreateTime(createTime);
     }
+
+    /**
+     * Create a detached, initialised RefuseReasonRecord
+     */
+    public RefuseReasonRecord(com.katana.jooq.entity.audit_dict.tables.pojos.RefuseReason value) {
+        super(RefuseReason.REFUSE_REASON);
+
+        if (value != null) {
+            setId(value.getId());
+            setCode(value.getCode());
+            setReason(value.getReason());
+            setReasonDetail(value.getReasonDetail());
+            setAuditType(value.getAuditType());
+            setOrderId(value.getOrderId());
+            setAppId(value.getAppId());
+            setAdditionable(value.getAdditionable());
+            setLevel(value.getLevel());
+            setParentId(value.getParentId());
+            setShowStatus(value.getShowStatus());
+            setCreateTime(value.getCreateTime());
+        }
+    }
 }

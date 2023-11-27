@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.FlatRiskCustomerRuleRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -86,7 +84,8 @@ public class FlatRiskCustomerRule extends TableImpl<FlatRiskCustomerRuleRecord> 
     public final TableField<FlatRiskCustomerRuleRecord, String> REGION_CODE = createField(DSL.name("region_code"), SQLDataType.VARCHAR(2048).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
+     * The column
+     * <code>audit_dict.flat_risk_customer_rule.effect_date_period</code>.
      */
     public final TableField<FlatRiskCustomerRuleRecord, String> EFFECT_DATE_PERIOD = createField(DSL.name("effect_date_period"), SQLDataType.VARCHAR(2048).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
@@ -101,7 +100,8 @@ public class FlatRiskCustomerRule extends TableImpl<FlatRiskCustomerRuleRecord> 
     public final TableField<FlatRiskCustomerRuleRecord, Integer> LOGIC_STATE = createField(DSL.name("logic_state"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.field("'-1'", SQLDataType.INTEGER)), this, "");
 
     /**
-     * The column <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
+     * The column
+     * <code>audit_dict.flat_risk_customer_rule.next_process_time</code>.
      */
     public final TableField<FlatRiskCustomerRuleRecord, Date> NEXT_PROCESS_TIME = createField(DSL.name("next_process_time"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "", new LocalDateTimeConverter());
 
@@ -134,14 +134,16 @@ public class FlatRiskCustomerRule extends TableImpl<FlatRiskCustomerRuleRecord> 
     }
 
     /**
-     * Create an aliased <code>audit_dict.flat_risk_customer_rule</code> table reference
+     * Create an aliased <code>audit_dict.flat_risk_customer_rule</code> table
+     * reference
      */
     public FlatRiskCustomerRule(String alias) {
         this(DSL.name(alias), FLAT_RISK_CUSTOMER_RULE);
     }
 
     /**
-     * Create an aliased <code>audit_dict.flat_risk_customer_rule</code> table reference
+     * Create an aliased <code>audit_dict.flat_risk_customer_rule</code> table
+     * reference
      */
     public FlatRiskCustomerRule(Name alias) {
         this(alias, FLAT_RISK_CUSTOMER_RULE);
@@ -160,7 +162,7 @@ public class FlatRiskCustomerRule extends TableImpl<FlatRiskCustomerRuleRecord> 
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -171,11 +173,6 @@ public class FlatRiskCustomerRule extends TableImpl<FlatRiskCustomerRuleRecord> 
     @Override
     public UniqueKey<FlatRiskCustomerRuleRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_3;
-    }
-
-    @Override
-    public List<UniqueKey<FlatRiskCustomerRuleRecord>> getKeys() {
-        return Arrays.<UniqueKey<FlatRiskCustomerRuleRecord>>asList(Keys.CONSTRAINT_3);
     }
 
     @Override

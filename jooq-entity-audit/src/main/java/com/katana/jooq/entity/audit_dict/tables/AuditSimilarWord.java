@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.AuditSimilarWordRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -109,14 +107,16 @@ public class AuditSimilarWord extends TableImpl<AuditSimilarWordRecord> {
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_similar_word</code> table reference
+     * Create an aliased <code>audit_dict.audit_similar_word</code> table
+     * reference
      */
     public AuditSimilarWord(String alias) {
         this(DSL.name(alias), AUDIT_SIMILAR_WORD);
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_similar_word</code> table reference
+     * Create an aliased <code>audit_dict.audit_similar_word</code> table
+     * reference
      */
     public AuditSimilarWord(Name alias) {
         this(alias, AUDIT_SIMILAR_WORD);
@@ -135,7 +135,7 @@ public class AuditSimilarWord extends TableImpl<AuditSimilarWordRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -146,11 +146,6 @@ public class AuditSimilarWord extends TableImpl<AuditSimilarWordRecord> {
     @Override
     public UniqueKey<AuditSimilarWordRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_2;
-    }
-
-    @Override
-    public List<UniqueKey<AuditSimilarWordRecord>> getKeys() {
-        return Arrays.<UniqueKey<AuditSimilarWordRecord>>asList(Keys.CONSTRAINT_2);
     }
 
     @Override

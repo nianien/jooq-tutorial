@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.SyncWordRuleRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -130,7 +128,7 @@ public class SyncWordRule extends TableImpl<SyncWordRuleRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -141,11 +139,6 @@ public class SyncWordRule extends TableImpl<SyncWordRuleRecord> {
     @Override
     public UniqueKey<SyncWordRuleRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_F;
-    }
-
-    @Override
-    public List<UniqueKey<SyncWordRuleRecord>> getKeys() {
-        return Arrays.<UniqueKey<SyncWordRuleRecord>>asList(Keys.CONSTRAINT_F);
     }
 
     @Override

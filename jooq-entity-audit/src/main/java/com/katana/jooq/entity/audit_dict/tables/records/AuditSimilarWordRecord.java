@@ -439,4 +439,24 @@ public class AuditSimilarWordRecord extends UpdatableRecordImpl<AuditSimilarWord
         setCreateTime(createTime);
         setModifyTime(modifyTime);
     }
+
+    /**
+     * Create a detached, initialised AuditSimilarWordRecord
+     */
+    public AuditSimilarWordRecord(com.katana.jooq.entity.audit_dict.tables.pojos.AuditSimilarWord value) {
+        super(AuditSimilarWord.AUDIT_SIMILAR_WORD);
+
+        if (value != null) {
+            setId(value.getId());
+            setOperatorId(value.getOperatorId());
+            setSource(value.getSource());
+            setOriginalWord(value.getOriginalWord());
+            setSimilarWord(value.getSimilarWord());
+            setStatus(value.getStatus());
+            setRemark(value.getRemark());
+            setExtraData(value.getExtraData());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
+    }
 }

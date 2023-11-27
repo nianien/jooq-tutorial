@@ -8,9 +8,7 @@ import com.katana.jooq.entity.uc.Keys;
 import com.katana.jooq.entity.uc.Uc;
 import com.katana.jooq.entity.uc.tables.records.AccountRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -26,7 +24,6 @@ import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-import org.jooq.plus.converter.EncryptConverter;
 import org.jooq.plus.converter.LocalDateTimeConverter;
 
 
@@ -64,12 +61,12 @@ public class Account extends TableImpl<AccountRecord> {
     /**
      * The column <code>uc.account.phone</code>.
      */
-    public final TableField<AccountRecord, String> PHONE = createField(DSL.name("phone"), SQLDataType.VARCHAR(13).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "", new EncryptConverter());
+    public final TableField<AccountRecord, String> PHONE = createField(DSL.name("phone"), SQLDataType.VARCHAR(13).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>uc.account.email</code>.
      */
-    public final TableField<AccountRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.VARCHAR(16).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "", new EncryptConverter());
+    public final TableField<AccountRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.VARCHAR(16).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>uc.account.create_time</code>.
@@ -126,7 +123,7 @@ public class Account extends TableImpl<AccountRecord> {
 
     @Override
     public Schema getSchema() {
-        return Uc.UC;
+        return aliased() ? null : Uc.UC;
     }
 
     @Override
@@ -137,11 +134,6 @@ public class Account extends TableImpl<AccountRecord> {
     @Override
     public UniqueKey<AccountRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_B;
-    }
-
-    @Override
-    public List<UniqueKey<AccountRecord>> getKeys() {
-        return Arrays.<UniqueKey<AccountRecord>>asList(Keys.CONSTRAINT_B);
     }
 
     @Override

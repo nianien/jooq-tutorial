@@ -365,4 +365,22 @@ public class AccountRecord extends UpdatableRecordImpl<AccountRecord> implements
         setTenantCode(tenantCode);
         setEnv(env);
     }
+
+    /**
+     * Create a detached, initialised AccountRecord
+     */
+    public AccountRecord(com.katana.jooq.entity.uc.tables.pojos.Account value) {
+        super(Account.ACCOUNT);
+
+        if (value != null) {
+            setId(value.getId());
+            setName(value.getName());
+            setPhone(value.getPhone());
+            setEmail(value.getEmail());
+            setCreateTime(value.getCreateTime());
+            setUpdateTime(value.getUpdateTime());
+            setTenantCode(value.getTenantCode());
+            setEnv(value.getEnv());
+        }
+    }
 }

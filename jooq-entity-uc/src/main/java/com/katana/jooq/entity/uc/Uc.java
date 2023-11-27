@@ -48,7 +48,8 @@ public class Uc extends SchemaImpl {
 
     @Override
     public final List<Table<?>> getTables() {
-        return Arrays.<Table<?>>asList(
-            Account.ACCOUNT);
+        return Arrays.asList(
+            Account.ACCOUNT
+        );
     }
 }

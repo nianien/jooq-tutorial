@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.RefuseReasonRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -145,7 +143,7 @@ public class RefuseReason extends TableImpl<RefuseReasonRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -156,11 +154,6 @@ public class RefuseReason extends TableImpl<RefuseReasonRecord> {
     @Override
     public UniqueKey<RefuseReasonRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_38;
-    }
-
-    @Override
-    public List<UniqueKey<RefuseReasonRecord>> getKeys() {
-        return Arrays.<UniqueKey<RefuseReasonRecord>>asList(Keys.CONSTRAINT_38);
     }
 
     @Override

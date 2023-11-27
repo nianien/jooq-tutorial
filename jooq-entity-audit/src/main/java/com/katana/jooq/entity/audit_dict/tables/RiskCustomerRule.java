@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.RiskCustomerRuleRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -149,14 +147,16 @@ public class RiskCustomerRule extends TableImpl<RiskCustomerRuleRecord> {
     }
 
     /**
-     * Create an aliased <code>audit_dict.risk_customer_rule</code> table reference
+     * Create an aliased <code>audit_dict.risk_customer_rule</code> table
+     * reference
      */
     public RiskCustomerRule(String alias) {
         this(DSL.name(alias), RISK_CUSTOMER_RULE);
     }
 
     /**
-     * Create an aliased <code>audit_dict.risk_customer_rule</code> table reference
+     * Create an aliased <code>audit_dict.risk_customer_rule</code> table
+     * reference
      */
     public RiskCustomerRule(Name alias) {
         this(alias, RISK_CUSTOMER_RULE);
@@ -175,7 +175,7 @@ public class RiskCustomerRule extends TableImpl<RiskCustomerRuleRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -186,11 +186,6 @@ public class RiskCustomerRule extends TableImpl<RiskCustomerRuleRecord> {
     @Override
     public UniqueKey<RiskCustomerRuleRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_D;
-    }
-
-    @Override
-    public List<UniqueKey<RiskCustomerRuleRecord>> getKeys() {
-        return Arrays.<UniqueKey<RiskCustomerRuleRecord>>asList(Keys.CONSTRAINT_D);
     }
 
     @Override

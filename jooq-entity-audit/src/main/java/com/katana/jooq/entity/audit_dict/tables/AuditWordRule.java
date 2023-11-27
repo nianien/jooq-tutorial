@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.AuditWordRuleRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -175,7 +173,7 @@ public class AuditWordRule extends TableImpl<AuditWordRuleRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -186,11 +184,6 @@ public class AuditWordRule extends TableImpl<AuditWordRuleRecord> {
     @Override
     public UniqueKey<AuditWordRuleRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_E;
-    }
-
-    @Override
-    public List<UniqueKey<AuditWordRuleRecord>> getKeys() {
-        return Arrays.<UniqueKey<AuditWordRuleRecord>>asList(Keys.CONSTRAINT_E);
     }
 
     @Override

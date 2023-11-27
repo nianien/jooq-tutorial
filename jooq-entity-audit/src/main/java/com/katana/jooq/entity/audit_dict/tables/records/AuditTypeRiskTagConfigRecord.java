@@ -66,28 +66,32 @@ public class AuditTypeRiskTagConfigRecord extends UpdatableRecordImpl<AuditTypeR
     }
 
     /**
-     * Setter for <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
+     * Setter for
+     * <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
      */
     public void setCreateTime(Date value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
+     * Getter for
+     * <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
      */
     public Date getCreateTime() {
         return (Date) get(3);
     }
 
     /**
-     * Setter for <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
+     * Setter for
+     * <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
      */
     public void setModifyTime(Date value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
+     * Getter for
+     * <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
      */
     public Date getModifyTime() {
         return (Date) get(4);
@@ -253,5 +257,20 @@ public class AuditTypeRiskTagConfigRecord extends UpdatableRecordImpl<AuditTypeR
         setCode(code);
         setCreateTime(createTime);
         setModifyTime(modifyTime);
+    }
+
+    /**
+     * Create a detached, initialised AuditTypeRiskTagConfigRecord
+     */
+    public AuditTypeRiskTagConfigRecord(com.katana.jooq.entity.audit_dict.tables.pojos.AuditTypeRiskTagConfig value) {
+        super(AuditTypeRiskTagConfig.AUDIT_TYPE_RISK_TAG_CONFIG);
+
+        if (value != null) {
+            setId(value.getId());
+            setType(value.getType());
+            setCode(value.getCode());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
     }
 }

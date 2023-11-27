@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.AuditRiskCategoryRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -89,14 +87,16 @@ public class AuditRiskCategory extends TableImpl<AuditRiskCategoryRecord> {
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_risk_category</code> table reference
+     * Create an aliased <code>audit_dict.audit_risk_category</code> table
+     * reference
      */
     public AuditRiskCategory(String alias) {
         this(DSL.name(alias), AUDIT_RISK_CATEGORY);
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_risk_category</code> table reference
+     * Create an aliased <code>audit_dict.audit_risk_category</code> table
+     * reference
      */
     public AuditRiskCategory(Name alias) {
         this(alias, AUDIT_RISK_CATEGORY);
@@ -115,7 +115,7 @@ public class AuditRiskCategory extends TableImpl<AuditRiskCategoryRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -126,11 +126,6 @@ public class AuditRiskCategory extends TableImpl<AuditRiskCategoryRecord> {
     @Override
     public UniqueKey<AuditRiskCategoryRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_B;
-    }
-
-    @Override
-    public List<UniqueKey<AuditRiskCategoryRecord>> getKeys() {
-        return Arrays.<UniqueKey<AuditRiskCategoryRecord>>asList(Keys.CONSTRAINT_B);
     }
 
     @Override

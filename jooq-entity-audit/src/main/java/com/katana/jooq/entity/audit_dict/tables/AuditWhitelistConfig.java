@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.AuditWhitelistConfigRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -114,14 +112,16 @@ public class AuditWhitelistConfig extends TableImpl<AuditWhitelistConfigRecord> 
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_whitelist_config</code> table reference
+     * Create an aliased <code>audit_dict.audit_whitelist_config</code> table
+     * reference
      */
     public AuditWhitelistConfig(String alias) {
         this(DSL.name(alias), AUDIT_WHITELIST_CONFIG);
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_whitelist_config</code> table reference
+     * Create an aliased <code>audit_dict.audit_whitelist_config</code> table
+     * reference
      */
     public AuditWhitelistConfig(Name alias) {
         this(alias, AUDIT_WHITELIST_CONFIG);
@@ -140,7 +140,7 @@ public class AuditWhitelistConfig extends TableImpl<AuditWhitelistConfigRecord> 
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -151,11 +151,6 @@ public class AuditWhitelistConfig extends TableImpl<AuditWhitelistConfigRecord> 
     @Override
     public UniqueKey<AuditWhitelistConfigRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_A;
-    }
-
-    @Override
-    public List<UniqueKey<AuditWhitelistConfigRecord>> getKeys() {
-        return Arrays.<UniqueKey<AuditWhitelistConfigRecord>>asList(Keys.CONSTRAINT_A);
     }
 
     @Override

@@ -291,4 +291,20 @@ public class AuditStrategyConfigRecord extends UpdatableRecordImpl<AuditStrategy
         setCreateTime(createTime);
         setModifyTime(modifyTime);
     }
+
+    /**
+     * Create a detached, initialised AuditStrategyConfigRecord
+     */
+    public AuditStrategyConfigRecord(com.katana.jooq.entity.audit_dict.tables.pojos.AuditStrategyConfig value) {
+        super(AuditStrategyConfig.AUDIT_STRATEGY_CONFIG);
+
+        if (value != null) {
+            setId(value.getId());
+            setName(value.getName());
+            setType(value.getType());
+            setEnabled(value.getEnabled());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
+    }
 }

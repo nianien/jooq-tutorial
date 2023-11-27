@@ -89,28 +89,32 @@ public class AuditTypeRiskTagConfig implements Serializable {
     }
 
     /**
-     * Getter for <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
+     * Getter for
+     * <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
      */
     public Date getCreateTime() {
         return this.createTime;
     }
 
     /**
-     * Setter for <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
+     * Setter for
+     * <code>audit_dict.audit_type_risk_tag_config.create_time</code>.
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     /**
-     * Getter for <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
+     * Getter for
+     * <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
      */
     public Date getModifyTime() {
         return this.modifyTime;
     }
 
     /**
-     * Setter for <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
+     * Setter for
+     * <code>audit_dict.audit_type_risk_tag_config.modify_time</code>.
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;

@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.RuleEvaluateDetailRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -114,14 +112,16 @@ public class RuleEvaluateDetail extends TableImpl<RuleEvaluateDetailRecord> {
     }
 
     /**
-     * Create an aliased <code>audit_dict.rule_evaluate_detail</code> table reference
+     * Create an aliased <code>audit_dict.rule_evaluate_detail</code> table
+     * reference
      */
     public RuleEvaluateDetail(String alias) {
         this(DSL.name(alias), RULE_EVALUATE_DETAIL);
     }
 
     /**
-     * Create an aliased <code>audit_dict.rule_evaluate_detail</code> table reference
+     * Create an aliased <code>audit_dict.rule_evaluate_detail</code> table
+     * reference
      */
     public RuleEvaluateDetail(Name alias) {
         this(alias, RULE_EVALUATE_DETAIL);
@@ -140,7 +140,7 @@ public class RuleEvaluateDetail extends TableImpl<RuleEvaluateDetailRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -151,11 +151,6 @@ public class RuleEvaluateDetail extends TableImpl<RuleEvaluateDetailRecord> {
     @Override
     public UniqueKey<RuleEvaluateDetailRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_E2;
-    }
-
-    @Override
-    public List<UniqueKey<RuleEvaluateDetailRecord>> getKeys() {
-        return Arrays.<UniqueKey<RuleEvaluateDetailRecord>>asList(Keys.CONSTRAINT_E2);
     }
 
     @Override

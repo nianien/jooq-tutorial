@@ -735,4 +735,32 @@ public class RiskCustomerRuleRecord extends UpdatableRecordImpl<RiskCustomerRule
         setBucketType(bucketType);
         setAdResources(adResources);
     }
+
+    /**
+     * Create a detached, initialised RiskCustomerRuleRecord
+     */
+    public RiskCustomerRuleRecord(com.katana.jooq.entity.audit_dict.tables.pojos.RiskCustomerRule value) {
+        super(RiskCustomerRule.RISK_CUSTOMER_RULE);
+
+        if (value != null) {
+            setId(value.getId());
+            setType(value.getType());
+            setContent(value.getContent());
+            setRiskType(value.getRiskType());
+            setAddReason(value.getAddReason());
+            setApplyProduct(value.getApplyProduct());
+            setHandleWay(value.getHandleWay());
+            setRegionCode(value.getRegionCode());
+            setEffectDatePeriod(value.getEffectDatePeriod());
+            setRemark(value.getRemark());
+            setLogicState(value.getLogicState());
+            setOperatorId(value.getOperatorId());
+            setOperatorName(value.getOperatorName());
+            setOperateTime(value.getOperateTime());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+            setBucketType(value.getBucketType());
+            setAdResources(value.getAdResources());
+        }
+    }
 }

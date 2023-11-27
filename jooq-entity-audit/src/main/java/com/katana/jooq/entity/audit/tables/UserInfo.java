@@ -8,9 +8,6 @@ import com.katana.jooq.entity.audit.Audit;
 import com.katana.jooq.entity.audit.Keys;
 import com.katana.jooq.entity.audit.tables.records.UserInfoRecord;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
@@ -122,17 +119,12 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
 
     @Override
     public Schema getSchema() {
-        return Audit.AUDIT;
+        return aliased() ? null : Audit.AUDIT;
     }
 
     @Override
     public UniqueKey<UserInfoRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_1;
-    }
-
-    @Override
-    public List<UniqueKey<UserInfoRecord>> getKeys() {
-        return Arrays.<UniqueKey<UserInfoRecord>>asList(Keys.CONSTRAINT_1);
     }
 
     @Override

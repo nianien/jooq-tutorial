@@ -402,4 +402,23 @@ public class SyncWordRuleRecord extends UpdatableRecordImpl<SyncWordRuleRecord> 
         setCreateTime(createTime);
         setModifyTime(modifyTime);
     }
+
+    /**
+     * Create a detached, initialised SyncWordRuleRecord
+     */
+    public SyncWordRuleRecord(com.katana.jooq.entity.audit_dict.tables.pojos.SyncWordRule value) {
+        super(SyncWordRule.SYNC_WORD_RULE);
+
+        if (value != null) {
+            setId(value.getId());
+            setSyncType(value.getSyncType());
+            setWordType(value.getWordType());
+            setSourceId(value.getSourceId());
+            setTargetId(value.getTargetId());
+            setStatus(value.getStatus());
+            setOperatorId(value.getOperatorId());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
+    }
 }

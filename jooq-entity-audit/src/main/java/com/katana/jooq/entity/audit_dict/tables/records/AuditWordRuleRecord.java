@@ -735,4 +735,32 @@ public class AuditWordRuleRecord extends UpdatableRecordImpl<AuditWordRuleRecord
         setCreateTime(createTime);
         setModifyTime(modifyTime);
     }
+
+    /**
+     * Create a detached, initialised AuditWordRuleRecord
+     */
+    public AuditWordRuleRecord(com.katana.jooq.entity.audit_dict.tables.pojos.AuditWordRule value) {
+        super(AuditWordRule.AUDIT_WORD_RULE);
+
+        if (value != null) {
+            setId(value.getId());
+            setSource(value.getSource());
+            setOperatorId(value.getOperatorId());
+            setWord(value.getWord());
+            setWordType(value.getWordType());
+            setMatchType(value.getMatchType());
+            setEntityType(value.getEntityType());
+            setExcludeWords(value.getExcludeWords());
+            setExcludeUsers(value.getExcludeUsers());
+            setExcludeCustomers(value.getExcludeCustomers());
+            setIndustries(value.getIndustries());
+            setGrade(value.getGrade());
+            setStatus(value.getStatus());
+            setRemark(value.getRemark());
+            setRiskTag(value.getRiskTag());
+            setExtraData(value.getExtraData());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
+    }
 }

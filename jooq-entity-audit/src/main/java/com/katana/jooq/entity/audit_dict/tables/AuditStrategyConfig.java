@@ -8,9 +8,7 @@ import com.katana.jooq.entity.audit_dict.AuditDict;
 import com.katana.jooq.entity.audit_dict.Keys;
 import com.katana.jooq.entity.audit_dict.tables.records.AuditStrategyConfigRecord;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
@@ -89,14 +87,16 @@ public class AuditStrategyConfig extends TableImpl<AuditStrategyConfigRecord> {
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_strategy_config</code> table reference
+     * Create an aliased <code>audit_dict.audit_strategy_config</code> table
+     * reference
      */
     public AuditStrategyConfig(String alias) {
         this(DSL.name(alias), AUDIT_STRATEGY_CONFIG);
     }
 
     /**
-     * Create an aliased <code>audit_dict.audit_strategy_config</code> table reference
+     * Create an aliased <code>audit_dict.audit_strategy_config</code> table
+     * reference
      */
     public AuditStrategyConfig(Name alias) {
         this(alias, AUDIT_STRATEGY_CONFIG);
@@ -115,7 +115,7 @@ public class AuditStrategyConfig extends TableImpl<AuditStrategyConfigRecord> {
 
     @Override
     public Schema getSchema() {
-        return AuditDict.AUDIT_DICT;
+        return aliased() ? null : AuditDict.AUDIT_DICT;
     }
 
     @Override
@@ -126,11 +126,6 @@ public class AuditStrategyConfig extends TableImpl<AuditStrategyConfigRecord> {
     @Override
     public UniqueKey<AuditStrategyConfigRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_9C;
-    }
-
-    @Override
-    public List<UniqueKey<AuditStrategyConfigRecord>> getKeys() {
-        return Arrays.<UniqueKey<AuditStrategyConfigRecord>>asList(Keys.CONSTRAINT_9C);
     }
 
     @Override

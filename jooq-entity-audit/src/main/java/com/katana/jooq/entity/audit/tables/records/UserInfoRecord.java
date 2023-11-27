@@ -363,4 +363,22 @@ public class UserInfoRecord extends UpdatableRecordImpl<UserInfoRecord> implemen
         setRefuseReason(refuseReason);
         setEnv(env);
     }
+
+    /**
+     * Create a detached, initialised UserInfoRecord
+     */
+    public UserInfoRecord(com.katana.jooq.entity.audit.tables.pojos.UserInfo value) {
+        super(UserInfo.USER_INFO);
+
+        if (value != null) {
+            setUserid(value.getUserid());
+            setName(value.getName());
+            setAdResource(value.getAdResource());
+            setAuditState(value.getAuditState());
+            setAuditorId(value.getAuditorId());
+            setReasonCode(value.getReasonCode());
+            setRefuseReason(value.getRefuseReason());
+            setEnv(value.getEnv());
+        }
+    }
 }

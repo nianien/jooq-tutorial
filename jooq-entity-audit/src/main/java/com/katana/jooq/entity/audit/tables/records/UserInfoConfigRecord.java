@@ -402,4 +402,23 @@ public class UserInfoConfigRecord extends UpdatableRecordImpl<UserInfoConfigReco
         setAuditorId(auditorId);
         setEnv(env);
     }
+
+    /**
+     * Create a detached, initialised UserInfoConfigRecord
+     */
+    public UserInfoConfigRecord(com.katana.jooq.entity.audit.tables.pojos.UserInfoConfig value) {
+        super(UserInfoConfig.USER_INFO_CONFIG);
+
+        if (value != null) {
+            setId(value.getId());
+            setUserid(value.getUserid());
+            setPriority(value.getPriority());
+            setMaxVersion(value.getMaxVersion());
+            setMinVersion(value.getMinVersion());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+            setAuditorId(value.getAuditorId());
+            setEnv(value.getEnv());
+        }
+    }
 }

@@ -54,8 +54,9 @@ public class Audit extends SchemaImpl {
 
     @Override
     public final List<Table<?>> getTables() {
-        return Arrays.<Table<?>>asList(
+        return Arrays.asList(
             UserInfo.USER_INFO,
-            UserInfoConfig.USER_INFO_CONFIG);
+            UserInfoConfig.USER_INFO_CONFIG
+        );
     }
 }

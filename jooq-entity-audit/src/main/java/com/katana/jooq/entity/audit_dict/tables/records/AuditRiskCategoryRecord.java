@@ -291,4 +291,20 @@ public class AuditRiskCategoryRecord extends UpdatableRecordImpl<AuditRiskCatego
         setCreateTime(createTime);
         setModifyTime(modifyTime);
     }
+
+    /**
+     * Create a detached, initialised AuditRiskCategoryRecord
+     */
+    public AuditRiskCategoryRecord(com.katana.jooq.entity.audit_dict.tables.pojos.AuditRiskCategory value) {
+        super(AuditRiskCategory.AUDIT_RISK_CATEGORY);
+
+        if (value != null) {
+            setId(value.getId());
+            setCode(value.getCode());
+            setName(value.getName());
+            setParentId(value.getParentId());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
+    }
 }

@@ -476,4 +476,25 @@ public class AuditWhitelistConfigRecord extends UpdatableRecordImpl<AuditWhiteli
         setCreateTime(createTime);
         setModifyTime(modifyTime);
     }
+
+    /**
+     * Create a detached, initialised AuditWhitelistConfigRecord
+     */
+    public AuditWhitelistConfigRecord(com.katana.jooq.entity.audit_dict.tables.pojos.AuditWhitelistConfig value) {
+        super(AuditWhitelistConfig.AUDIT_WHITELIST_CONFIG);
+
+        if (value != null) {
+            setId(value.getId());
+            setCid(value.getCid());
+            setSiteUrl(value.getSiteUrl());
+            setUcId(value.getUcId());
+            setBizTypes(value.getBizTypes());
+            setTargetType(value.getTargetType());
+            setDimension(value.getDimension());
+            setAuditorId(value.getAuditorId());
+            setStatus(value.getStatus());
+            setCreateTime(value.getCreateTime());
+            setModifyTime(value.getModifyTime());
+        }
+    }
 }

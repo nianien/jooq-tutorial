@@ -120,7 +120,7 @@ public class AuditDict extends SchemaImpl {
 
     @Override
     public final List<Table<?>> getTables() {
-        return Arrays.<Table<?>>asList(
+        return Arrays.asList(
             AuditRiskCategory.AUDIT_RISK_CATEGORY,
             AuditRiskTag.AUDIT_RISK_TAG,
             AuditSimilarWord.AUDIT_SIMILAR_WORD,
@@ -133,6 +133,7 @@ public class AuditDict extends SchemaImpl {
             RiskCustomerRule.RISK_CUSTOMER_RULE,
             RuleEvaluateDetail.RULE_EVALUATE_DETAIL,
             SyncWordRule.SYNC_WORD_RULE,
-            SystemProperty.SYSTEM_PROPERTY);
+            SystemProperty.SYSTEM_PROPERTY
+        );
     }
 }
