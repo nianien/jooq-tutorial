@@ -34,11 +34,6 @@
                 <version>${jooq.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.kuaishou.ad</groupId>
-                <artifactId>ks-jooq-gen</artifactId>
-                <version>1.0.3</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>2.6.3</version>
@@ -50,11 +45,11 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
-            <dependency>
+           <!-- <dependency>
                 <groupId>com.kuaishou.ad</groupId>
                 <artifactId>sqllog-spring-boot-starter</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
-            </dependency>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
     <!-- 依赖包 -->
@@ -63,10 +58,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.kuaishou.ad</groupId>
-            <artifactId>ks-jooq-gen</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -126,6 +117,11 @@
                             </execution>
                         </executions>
                         <dependencies>
+                            <dependency>
+                                <groupId>io.github.nianien</groupId>
+                                <artifactId>jooq-gen</artifactId>
+                                <version>3.16.20u4</version>
+                            </dependency>
                             <dependency>
                                 <groupId>org.jooq</groupId>
                                 <artifactId>jooq-meta-extensions</artifactId>

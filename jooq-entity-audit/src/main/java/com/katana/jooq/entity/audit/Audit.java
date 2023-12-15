@@ -30,12 +30,12 @@ public class Audit extends SchemaImpl {
     public static final Audit AUDIT = new Audit();
 
     /**
-     * The table <code>audit.user_info</code>.
+     * 用户基础信息表
      */
     public final UserInfo USER_INFO = UserInfo.USER_INFO;
 
     /**
-     * The table <code>audit.user_info_config</code>.
+     * 用户配置表
      */
     public final UserInfoConfig USER_INFO_CONFIG = UserInfoConfig.USER_INFO_CONFIG;
 

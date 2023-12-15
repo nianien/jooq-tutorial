@@ -82,7 +82,7 @@
             <properties>
                 <property>
                     <key>scripts</key>
-                    <value>**/h2/*.sql</value>
+                    <value>**/ddl/*.sql</value>
                 </property>
                 <property>
                     <key>sort</key>

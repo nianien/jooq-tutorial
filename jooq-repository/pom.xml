@@ -12,17 +12,17 @@
     <artifactId>jooq-repository</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.katana</groupId>
+            <groupId>io.github.nianien</groupId>
             <artifactId>jooq-plus</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.katana</groupId>
+            <groupId>io.github.nianien</groupId>
             <artifactId>jooq-entity-audit</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.katana</groupId>
+            <groupId>io.github.nianien</groupId>
             <artifactId>jooq-entity-uc</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -31,11 +31,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jooq</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.h2database</groupId>-->
-<!--            <artifactId>h2</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

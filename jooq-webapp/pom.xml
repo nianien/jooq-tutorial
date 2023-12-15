@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.katana</groupId>
+            <groupId>io.github.nianien</groupId>
             <artifactId>jooq-repository</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -26,10 +26,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.kuaishou.ad</groupId>
-            <artifactId>sqllog-spring-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.kuaishou.ad</groupId>-->
+<!--            <artifactId>sqllog-spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
 

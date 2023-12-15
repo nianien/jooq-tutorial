@@ -47,4 +47,18 @@ public class JooqTest {
                         .where(ACCOUNT.NAME.like(name))));
         System.out.println(sql);
     }
+
+
+    @Test
+    public void test2() {
+        DefaultConfiguration config = new DefaultConfiguration();
+        config.setSQLDialect(SQLDialect.MYSQL);
+        config.settings()
+                //shard-sphere不支持schema
+                .withRenderSchema(false)
+                .withRenderNameStyle(RenderNameStyle.QUOTED)
+        ;
+        dslContext = DSL.using(config);
+        System.out.println(dslContext.renderInlined(USER_INFO));
+    }
 }

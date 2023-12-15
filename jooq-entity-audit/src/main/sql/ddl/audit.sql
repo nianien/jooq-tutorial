@@ -2,7 +2,7 @@
 
 
 CREATE SCHEMA `audit`;
-SET SCHEMA `audit`;
+use `audit`;
 
 
 CREATE TABLE `user_info` (
@@ -13,11 +13,10 @@ CREATE TABLE `user_info` (
   `auditor_id` bigint(20) NOT NULL DEFAULT '-1' COMMENT '审核员id',
   `reason_code` varchar(256) DEFAULT NULL COMMENT '拒绝理由',
   `refuse_reason` varchar(1024) DEFAULT NULL COMMENT '拒绝原因',
-  `env`       varchar(8) NOT NULL DEFAULT '' COMMENT '<环境>',
-  PRIMARY KEY (`userid`)/*,
-  KEY `idx_state` (`audit_state`),
-  KEY `idx_audit_start_time` (`audit_start_time`)*/
-); /*ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户基础信息表'*/
+  `env`       varchar(8) NOT NULL DEFAULT '' COMMENT '环境',
+  PRIMARY KEY (`userid`),
+  KEY `idx_state` (`audit_state`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户基础信息表';
 
 
 CREATE TABLE `user_info_config` (
@@ -29,9 +28,9 @@ CREATE TABLE `user_info_config` (
   `create_time` timestamp NOT NULL DEFAULT '2010-01-01 00:00:00' COMMENT '创建时间',
   `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `auditor_id` bigint(20) NOT NULL DEFAULT '-1' COMMENT '审核员id:-1表示未被任何审核员修改优先级，>0表示最后修改优先级的审核员id',
-  `env`       varchar(8) NOT NULL DEFAULT '' COMMENT '<环境>',
-  PRIMARY KEY (`id`)/*,
-  UNIQUE KEY `userid` (`userid`) USING BTREE,
-  KEY `priority` (`priority`,`min_version`) USING BTREE*/
-);/* ENGINE=InnoDB  DEFAULT CHARSET=utf8*/
+  `env`       varchar(8) NOT NULL DEFAULT '' COMMENT '环境',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `userid` (`userid`) ,
+  KEY `priority` (`priority`,`min_version`) USING BTREE
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户配置表';
 

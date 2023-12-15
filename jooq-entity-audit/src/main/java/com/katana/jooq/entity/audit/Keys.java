@@ -26,6 +26,7 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<UserInfoRecord> CONSTRAINT_1 = Internal.createUniqueKey(UserInfo.USER_INFO, DSL.name("CONSTRAINT_1"), new TableField[] { UserInfo.USER_INFO.USERID }, true);
-    public static final UniqueKey<UserInfoConfigRecord> CONSTRAINT_1A = Internal.createUniqueKey(UserInfoConfig.USER_INFO_CONFIG, DSL.name("CONSTRAINT_1A"), new TableField[] { UserInfoConfig.USER_INFO_CONFIG.ID }, true);
+    public static final UniqueKey<UserInfoRecord> USER_INFO_PRIMARY_KEY = Internal.createUniqueKey(UserInfo.USER_INFO, DSL.name("primary_key"), new TableField[] { UserInfo.USER_INFO.USERID }, true);
+    public static final UniqueKey<UserInfoConfigRecord> USER_INFO_CONFIG_PRIMARY_KEY = Internal.createUniqueKey(UserInfoConfig.USER_INFO_CONFIG, DSL.name("primary_key"), new TableField[] { UserInfoConfig.USER_INFO_CONFIG.ID }, true);
+    public static final UniqueKey<UserInfoConfigRecord> USER_INFO_CONFIG_USERID = Internal.createUniqueKey(UserInfoConfig.USER_INFO_CONFIG, DSL.name("userid"), new TableField[] { UserInfoConfig.USER_INFO_CONFIG.USERID }, true);
 }
