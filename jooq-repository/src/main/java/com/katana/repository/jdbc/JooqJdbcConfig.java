@@ -1,6 +1,10 @@
 package com.katana.repository.jdbc;
 
 import ch.qos.logback.classic.PatternLayout;
+import lombok.SneakyThrows;
+import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
+import org.apache.shardingsphere.sharding.yaml.config.YamlShardingRuleConfiguration;
+import org.apache.shardingsphere.sharding.yaml.swapper.YamlShardingRuleConfigurationSwapper;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.RenderNameCase;
@@ -9,12 +13,15 @@ import org.jooq.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DelegatingDataSource;
 
 import javax.sql.DataSource;
+import java.util.LinkedHashMap;
+import java.util.Properties;
 
 @Configuration
 public class JooqJdbcConfig {
@@ -22,6 +29,7 @@ public class JooqJdbcConfig {
 
     @Value("${spring.application.name:}")
     private String name;
+
 
     @Bean
     @Primary

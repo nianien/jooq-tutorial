@@ -27,15 +27,15 @@ public class FieldCompleteListener implements DefaultListener {
     /**
      * 避免重复处理，使用WeakHashMap,在SQL处理完被移除
      */
-    private ThreadLocal<Map<Integer, Boolean>> visitedMap = ThreadLocal.withInitial(() -> new HashMap<>());
+    private static ThreadLocal<Map<Integer, Boolean>> visitedSQL = ThreadLocal.withInitial(() -> new HashMap<>());
     /**
      * 需要自动补齐的字段
      */
-    private Map<String, Field<String>> AUTO_FIELDS = new HashMap<>();
+    private static Map<String, Field<String>> AUTO_FIELDS = new HashMap<>();
     /**
      * 需要补齐字段的默认值
      */
-    private static final Map<String, ThreadLocal<Param<String>>> DEFAULT_VALUES = new HashMap<>();
+    private static final Map<String, ThreadLocal<Param<String>>> AUTO_FIELDS_VALUE = new HashMap<>();
 
     /**
      * 需要追加的字段和默认值
@@ -47,7 +47,7 @@ public class FieldCompleteListener implements DefaultListener {
             String fieldName = fieldAndDefaultValue[0];
             String defaultValue = fieldAndDefaultValue[1];
             AUTO_FIELDS.put(fieldName, DSL.field(fieldName, String.class));
-            DEFAULT_VALUES.put(fieldName, ThreadLocal.withInitial(() -> val(defaultValue)));
+            AUTO_FIELDS_VALUE.put(fieldName, ThreadLocal.withInitial(() -> val(defaultValue)));
         }
     }
 
@@ -61,7 +61,7 @@ public class FieldCompleteListener implements DefaultListener {
             try {
                 //在打印日志时会重复访问VisitContext,避免重复改写SQL
                 //同一个线程不会有并发问题, 同一个query只会被改写一次
-                if (visitedMap.get().putIfAbsent(System.identityHashCode(query), true) == null) {
+                if (visitedSQL.get().putIfAbsent(System.identityHashCode(query), true) == null) {
                     rewriteQuery(query, AUTO_FIELDS);
                 }
             } catch (Exception e) {
@@ -149,7 +149,7 @@ public class FieldCompleteListener implements DefaultListener {
      * @return
      */
     private Param<String> targetValue(Field field) {
-        return DEFAULT_VALUES.get(field.getName()).get();
+        return AUTO_FIELDS_VALUE.get(field.getName()).get();
     }
 
 
@@ -177,7 +177,7 @@ public class FieldCompleteListener implements DefaultListener {
      * @return
      */
     public static String setFieldValue(String name, String value) {
-        ThreadLocal<Param<String>> tl = DEFAULT_VALUES.get(name);
+        ThreadLocal<Param<String>> tl = AUTO_FIELDS_VALUE.get(name);
         Param<String> pre = tl.get();
         tl.set(val(value));
         if (pre != null) {
@@ -188,19 +188,19 @@ public class FieldCompleteListener implements DefaultListener {
 
     @Override
     public void start(ExecuteContext ctx) {
-        //初始化visitedMap，用于重复判定，保证SQL请求只会重写一次
-        visitedMap.get();
+        //初始化visitedSQL，用于重复判定，保证SQL请求只会重写一次
+        visitedSQL.get();
     }
 
     @Override
     public void end(ExecuteContext ctx) {
-        //移除visitedMap，用于处理新的SQL请求
-        visitedMap.remove();
+        //移除visitedSQL，用于处理新的SQL请求
+        visitedSQL.remove();
     }
 
     @Override
     public void exception(ExecuteContext ctx) {
-        visitedMap.remove();
+        visitedSQL.remove();
     }
 
 }
