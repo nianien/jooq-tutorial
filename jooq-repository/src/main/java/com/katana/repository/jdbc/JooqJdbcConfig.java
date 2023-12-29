@@ -1,10 +1,5 @@
 package com.katana.repository.jdbc;
 
-import ch.qos.logback.classic.PatternLayout;
-import lombok.SneakyThrows;
-import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
-import org.apache.shardingsphere.sharding.yaml.config.YamlShardingRuleConfiguration;
-import org.apache.shardingsphere.sharding.yaml.swapper.YamlShardingRuleConfigurationSwapper;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.RenderNameCase;
@@ -12,16 +7,12 @@ import org.jooq.conf.RenderQuotedNames;
 import org.jooq.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DelegatingDataSource;
 
 import javax.sql.DataSource;
-import java.util.LinkedHashMap;
-import java.util.Properties;
 
 @Configuration
 public class JooqJdbcConfig {
@@ -42,12 +33,14 @@ public class JooqJdbcConfig {
                 .withRenderSchema(false)
                 .withRenderNameCase(RenderNameCase.AS_IS)
                 .withRenderQuotedNames(RenderQuotedNames.EXPLICIT_DEFAULT_UNQUOTED);
-        config.set(
-//                new PerformanceListener().asExecuteListener(),
-                new FieldCompleteListener().asExecuteListener(),
-                new FieldValidateListener().asExecuteListener()
+        DefaultListener fieldCompleteListener = new FieldCompleteListener(
+                new String[]{"tenant_code", "default"}, new String[]{"env", "local"});
+        config.setExecuteListener(
+                new PerformanceListener(),
+                fieldCompleteListener,
+                new FieldValidateListener()
         );
-        config.set(new FieldCompleteListener(new String[]{"tenant_code", "default"}, new String[]{"env", "local"}).asVisitListener());
+        config.setVisitListener(fieldCompleteListener);
         return DSL.using(config);
     }
 
